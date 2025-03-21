@@ -62,9 +62,9 @@ function GroceriesList({ groceries, handleSorting }) {
   return (
     <View style = {styles.container}>
       <View style={styles.buttonContainer}>
-        <Button onPress={()=>handleSorting("item")} style={{marginLeft:30}}>Sort by Item</Button>
-        <Button onPress={()=>handleSorting("meal")} style={{marginLeft:20}}>Sort by Meal</Button>
-        <Button onPress={()=>handleSorting("default")} style={{marginLeft:20}}>Sort Default</Button>
+        <Button onPress={()=>handleSorting("item")}>Sort by Item</Button>
+        <Button onPress={()=>handleSorting("meal")}>Sort by Meal</Button>
+        <Button onPress={()=>handleSorting("default")}>Sort Default</Button>
       </View>
       <FlatList
         data={groceries}
@@ -85,7 +85,7 @@ const styles = StyleSheet.create({
   buttonContainer:{
     flexDirection:'row',
     alignItems: 'center',
-    //justifyContent: 'space-between',
+    justifyContent: 'space-between',
     marginBottom: 8,
   },
 })

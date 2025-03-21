@@ -52,7 +52,7 @@ function AuthContent({ isLogin, onAuthenticate }) {
       });
       return;
     }
-    setEmailAddress(email);
+    setEmailAddress(email.toLowerCase());
     console.log("email:",emailAddress);
     onAuthenticate({ email, password });
   }

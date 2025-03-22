@@ -262,7 +262,7 @@ export default function Settings({ route, navigation }){
         const newEmailGroup = {
             group: selectedGroupName,
             groupId: groupId,
-            email: enteredEmail,
+            email: enteredEmail.toLowerCase(),
         }
 
         if(selectedGroupName==='Personal Account'){

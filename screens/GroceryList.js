@@ -29,35 +29,36 @@ function GroceryList() {
         const items = await fetchLists();
         //console.log("GroceryList fetched items:",items)
 
-        const result = pullGroupChosen()
+        const result = await pullGroupChosen()
         //.then((result)=>{
-          //console.log("RecenetMeals groupChosen:",result);
+          console.log("GroceryList useEffect result:",result);
           let allItems = [];
 
           items.map((item)=>{
-            //console.log("RecentMeals mapped group:",meal)
-            if(item.group === result){
+            if(item.group&&item.group === result){
               console.log("GroceryList item.group:",item.group,"usingGroup:",result)
               allItems.push(item);
             }
           })
-          // console.log("RecentMeals allItems:",allItems);
+          console.log("RecentMeals allItems:",allItems);
           // console.log("RecentMeals typeOf:",typeof allItems)
           if(typeof allItems ==='object'){
           
             listsCtx.setLists(allItems);
+            setRecentLists(allItems);
+            setIsFetching(false);
             //console.log("RecentMeals meals:",mealsCtx.meals);
           }
         //})
-        listsCtx.setLists(items);
-        setRecentLists(items);
+        //listsCtx.setLists(items);
+        
       } catch (error) {
         console.log(error);
         setError('Could not fetch lists!');
       }
     }
     getList();
-    setIsFetching(false);
+    
   }, []);
 
   //Ensure reload of lists////////////////////////////////////////////////////
@@ -112,7 +113,8 @@ function GroceryList() {
         if(typeof allItems ==='object'){
         
           listsCtx.setLists(allItems);
-          setRecentLists(items);
+          setRecentLists(allItems);
+          setIsFetching(false);
           //console.log("RecentMeals meals:",mealsCtx.meals);
         }
       })
@@ -122,7 +124,7 @@ function GroceryList() {
       console.log(error);
       setError('Could not fetch lists!');
     } finally {
-      setIsFetching(false);
+      
     }
   }
 //Ensure reload of lists////////////////////////////////////////////////////

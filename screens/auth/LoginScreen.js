@@ -25,7 +25,7 @@ function LoginScreen() {
 
   async function loginHandler({ email, password }) {
     //establishes the email in context.
-    setEmailAddress(email);
+    setEmailAddress(email.toLowerCase());
 
     try{
       pullGroupChosen()

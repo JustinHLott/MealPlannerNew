@@ -198,16 +198,26 @@ export default function App() {
   
     const authCtx = useContext(AuthContext);
     const {emailAddress, setEmailAddress} = useEmail()
-  
+    const {groupUsing, setGroupUsing} = useEmail()
+   
     useEffect(() => {
       async function fetchToken() {
         console.log("Made it to fetchToken")
-        const storedToken = await AsyncStorage.getItem(emailAddress + 'token');
-  
-        if (!storedToken) {
+        const storedToken = await AsyncStorage.getItem('token');
+        const storedEmail = await AsyncStorage.getItem('email');
+        const storedPassword = await AsyncStorage.getItem('password');
+
+        if(storedToken&&storedEmail&&storedPassword){
+          const storedGroup = await AsyncStorage.getItem(storedEmail+'groupChosen');
+          console.log("stored token:",storedToken);
+          console.log("stored email:",storedEmail);
+          console.log("stored password:",storedPassword);
+          setEmailAddress(storedEmail);
           authCtx.authenticate(storedToken);
+          if(storedGroup){
+            setGroupUsing(storedGroup);
+          }
         }
-  
         setIsTryingLogin(false);
       }
   

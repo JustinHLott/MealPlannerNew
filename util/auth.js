@@ -14,7 +14,9 @@ async function authenticate(mode, email, password) {
   });
 
   const token = response.data.idToken;
-  storeValue(email+'token', token)
+  storeValue('token', token);
+  storeValue('email', email.toLowerCase());
+  storeValue('password', password);
   return token;
 }
 

@@ -47,7 +47,7 @@ function SignupScreen({navigation}) {
   async function createNewGroup(email){
     console.log("SignupScreen createNewGroup");
     try{
-      setEmailAddress(email);
+      setEmailAddress(email.toLowerCase());
       const newGroup = {
           group: email,
           email: email,

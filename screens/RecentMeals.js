@@ -58,20 +58,21 @@ function RecentMeals() {
             mealsCtx.setMeals([...allGroups,].sort((a, b) => b.date - a.date));
             setRecentMeals([...allGroups,].sort((a, b) => b.date - a.date));
             //console.log("RecentMeals meals:",mealsCtx.meals);
+            setIsFetching(false);
           }
         })
       } catch (error) {
         console.log(error)
         setError('Could not fetch meals!');
       }
-      setIsFetching(false);
+      
     }
 
     getMeals();
   }, []);
 
   async function pullGroupChosen(){
-    //console.log("RecentMeals email:",emailAddress)
+    console.log("RecentMeals email:",emailAddress)
     const accountTypeChosen = await getValue(emailAddress+"groupChosen");
     return accountTypeChosen?accountTypeChosen:groupUsing;
   };
@@ -142,6 +143,7 @@ function RecentMeals() {
 
   if(firstTime===true){
     console.log("RecentMeals firstTime")
+    setIsFetching(true);
     setFirstTime(false);
     getMeals();
   }
@@ -186,7 +188,9 @@ function RecentMeals() {
           //console.log("RecentMeals meals",theMeals)
           return theMeals;
         });
+
         setRecentMeals(recentMeals1);
+        setIsFetching(false);
       }
     })
   }

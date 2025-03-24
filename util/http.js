@@ -56,6 +56,7 @@ export async function storeMeal(mealData,addCtxList,addCtxMeal) {
             ...item,
             thisId: responseGrocery.data.name,
             mealId: response.data.name,
+            mealDesc: mealData.decription,
           };
           // const updatedGrocery = {
           //   ...groceryData,

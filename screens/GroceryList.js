@@ -25,22 +25,22 @@ function GroceryList() {
     async function getList() {
       
       try {
-        console.log("Makes it to useEffect");
+        //console.log("Makes it to useEffect");
         const items = await fetchLists();
         //console.log("GroceryList fetched items:",items)
 
         const result = await pullGroupChosen()
         //.then((result)=>{
-          console.log("GroceryList useEffect result:",result);
+          //console.log("GroceryList useEffect result:",result);
           let allItems = [];
 
           items.map((item)=>{
             if(item.group&&item.group === result){
-              console.log("GroceryList item.group:",item.group,"usingGroup:",result)
+              //console.log("GroceryList item.group:",item.group,"usingGroup:",result)
               allItems.push(item);
             }
           })
-          console.log("RecentMeals allItems:",allItems);
+          //console.log("RecentMeals allItems:",allItems);
           // console.log("RecentMeals typeOf:",typeof allItems)
           if(typeof allItems ==='object'){
           

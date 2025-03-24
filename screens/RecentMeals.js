@@ -38,8 +38,8 @@ function RecentMeals() {
 
         pullGroupChosen()
         .then((result)=>{
-          console.log("RecenetMeals groupChosen:",result);
-          console.log("RecenetMeals groupUsing:",groupUsing);
+          //console.log("RecentMeals groupChosen:",result);
+          //console.log("RecenetMeals groupUsing:",groupUsing);
           //if(result instanceof Promise){
           let allGroups = [];
 
@@ -72,7 +72,7 @@ function RecentMeals() {
   }, []);
 
   async function pullGroupChosen(){
-    console.log("RecentMeals email:",emailAddress)
+    //console.log("RecentMeals email:",emailAddress)
     const accountTypeChosen = await getValue(emailAddress+"groupChosen");
     return accountTypeChosen?accountTypeChosen:groupUsing;
   };
@@ -155,7 +155,7 @@ function RecentMeals() {
     const meals = await fetchMeals();
     const groupUsing = pullGroupChosen()
     .then((result)=>{
-      console.log("RecenetMeals groupChosen:",result);
+      //console.log("RecentMeals groupChosen:",result);
       //if(result instanceof Promise){
       let allGroups = [];
 
@@ -172,7 +172,7 @@ function RecentMeals() {
       
         mealsCtx.setMeals(allGroups);
         const mealsSorted = [...allGroups,].sort((a, b) => a.date - b.date);
-        console.log("RecentMeals meals:",mealsSorted);
+        //console.log("RecentMeals meals:",mealsSorted);
         const recentMeals1 = mealsSorted.filter((meal) => {
           let firstDay = new Date(firstDate);
           //console.log("Recent Meals firstDay:",firstDay);

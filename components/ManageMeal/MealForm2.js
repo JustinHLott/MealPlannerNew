@@ -216,35 +216,35 @@ export default function MealForm2({ initialMeal = {}, defaultDate, onSubmit, sub
       ...prevMeal,
       groceryItems: updatedGroceryItems,
     }));
-    console.log("new meal: ",meal.groceryItems)
+    //console.log("new meal: ",meal.groceryItems)
   };
 
-    // Function to update grocery item checkbox
-    const handleGroceryCheckbox = (index) => {
-      const updatedGroceryItems = [...meal.groceryItems];
-      const item = updatedGroceryItems[index]["checkedOff"];
-      let tf = false;
+    // // Function to update grocery item checkbox
+    // const handleGroceryCheckbox = (index) => {
+    //   const updatedGroceryItems = [...meal.groceryItems];
+    //   const item = updatedGroceryItems[index]["checkedOff"];
+    //   let tf = false;
 
-      if(item){
-        if (item.value === "checked"){
-          updatedGroceryItems[index]["checkedOff"] = "unChecked"
-          //setChecked(true);
-          tf = true;
-        }else{
-          updatedGroceryItems[index]["checkedOff"] = "checked"
-          //setChecked(false);
-          tf = false;
-        }
-      }
+    //   if(item){
+    //     if (item.value === "checked"){
+    //       updatedGroceryItems[index]["checkedOff"] = "unChecked"
+    //       //setChecked(true);
+    //       tf = true;
+    //     }else{
+    //       updatedGroceryItems[index]["checkedOff"] = "checked"
+    //       //setChecked(false);
+    //       tf = false;
+    //     }
+    //   }
 
-      setMeal((prevMeal) => ({
-        ...prevMeal,
-        groceryItems: updatedGroceryItems,
-      }));
+    //   setMeal((prevMeal) => ({
+    //     ...prevMeal,
+    //     groceryItems: updatedGroceryItems,
+    //   }));
 
-      console.log(tf);
-      return tf;
-    };
+    //   console.log(tf);
+    //   return tf;
+    // };
     
   // Function to add a new grocery item
   const addGroceryItem = (theGroceryItem) => {
@@ -486,11 +486,11 @@ export default function MealForm2({ initialMeal = {}, defaultDate, onSubmit, sub
             value={date}
             //value={(validateDate(date))}
             //value={(meal.date? validateDate(meal.date):validateDate(maxDate))}
-            onKeyPress={({ nativeEvent }) => {
-              if (nativeEvent.key === "Backspace") {
-                setText((prevText) => prevText.slice(0, -1)); // Removes last character
-              }
-            }}
+            // onKeyPress={({ nativeEvent }) => {
+            //   if (nativeEvent.key === "Backspace") {
+            //     setText((prevText) => prevText.slice(0, -1)); // Removes last character
+            //   }
+            // }}
           />
           <IconButtonNoText style={{width: '20%'}}icon="pencil" size={20} color={pencilColor} onPress={() => makeDateEditable()}/>
           {/* <IconButtonNoText style={{width: '20%'}}icon="pencil" size={20} color={pencilColor} onPress={() => setShowPicker(true)}/> */}
@@ -537,8 +537,8 @@ export default function MealForm2({ initialMeal = {}, defaultDate, onSubmit, sub
         renderItem={({ item, index }) => (
           <View>
           <View style={styles.inputContainer}>
-            <View style={styles.checkboxContainer}>
-              {/* <Pressable onPress={() => handleGroceryCheckbox(index)} style={styles.checkbox}> */}
+            {/* <View style={styles.checkboxContainer}>
+              
                 <MaterialIcons  
                   size={24} 
                   color={GlobalStyles.colors.primary100}
@@ -546,8 +546,7 @@ export default function MealForm2({ initialMeal = {}, defaultDate, onSubmit, sub
                   name={checked ? 'check-box' : 'check-box-outline-blank'}
                   onPress={() => setChecked(!checked)} // Toggle checkbox
                   />
-              {/* </Pressable> */}
-            </View>
+            </View> */}
             <TextInput style={[styles.inputQty,styles.inputAll]}
               keyboardType='numeric'
               placeholder="Qty"

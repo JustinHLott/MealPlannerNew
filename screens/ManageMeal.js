@@ -204,7 +204,7 @@ function updateCtxList(updatedGrocery,id){
         //also must add meal to ctx and add groceries to ctx.
         navigation.goBack();
       } else {
-        console.log("ManageMeal adding")
+        console.log("ManageMeal adding");
         const id = await storeMeal(mealData,addCtxList,addCtxMeal);//This adds the meal to firebase
         console.log("ManageMeal finishes adding")
         theID = id;
@@ -521,8 +521,8 @@ function updateCtxList(updatedGrocery,id){
           onSubmit={confirmHandler}
           submitButtonLabel={isEditing ? 'Update' : 'Save Meal'}
         />
-        {/*This delete the meal*/}
-         {isEditing && (
+        {/*This deletes the meal*/}
+         {/* {isEditing && (
           <View style={styles.deleteContainer}>
             <IconButton
               icon="trash"
@@ -531,7 +531,7 @@ function updateCtxList(updatedGrocery,id){
               onPress={deleteMealHandler}
             />
           </View>
-        )}
+        )} */}
         
       </ScrollView>
       <Footer/>

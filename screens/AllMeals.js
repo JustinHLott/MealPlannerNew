@@ -11,12 +11,17 @@ import { MealsContext } from '../store/meals-context';
 function AllMeals() {
   // const [isFetching, setIsFetching] = useState(false);
   // const [error, setError] = useState();
-  // const [meals, setMeals] = useState(null);
-  // const [firstTime, setFirstTime] = useState(false);
+  const [meals, setMeals] = useState(null);
+  const [firstTime, setFirstTime] = useState(true);
   //let mealsSorted;
   
   const mealsCtx = useContext(MealsContext);
 
+  if(firstTime){
+    //This sorts the meals by the date field.
+    setMeals([...mealsCtx.meals,].sort((a, b) => b.date - a.date));
+    setFirstTime(false);
+  };
   // useFocusEffect(
   //     useCallback(() => {
   //       setFirstTime(true);
@@ -73,7 +78,7 @@ function AllMeals() {
 
   return (
     <MealsOutput
-      meals={mealsCtx.meals}
+      meals={meals}
       fallbackText="No meals found..."
     />
   );

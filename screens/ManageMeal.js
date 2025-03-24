@@ -130,14 +130,14 @@ function ManageMeal({ route, navigation }) {
   // },[]);
 
 function updateCtxList(updatedGrocery,id){
-  console.log("ManageMeal updateCtxlist:",updatedGrocery,id);
+  //console.log("ManageMeal updateCtxlist:",updatedGrocery,id);
   listsCtx.updateList(id,updatedGrocery);
 }
 
   async function addCtxList(updatedGrocery,id){
     try{
-      console.log("ManageMeal addCtxlist")
-      console.log("ManageMeals newItemId2: ", id)
+      //console.log("ManageMeal addCtxlist")
+      //console.log("ManageMeals newItemId2: ", id)
       const groceryItem={
         thisId: id,
         checkedOff: updatedGrocery.checkedOff,
@@ -146,7 +146,7 @@ function updateCtxList(updatedGrocery,id){
         description: updatedGrocery.description,
         qty: updatedGrocery.qty
       };
-      console.log("ManageMeals groceryItem: ", groceryItem)
+      //console.log("ManageMeals groceryItem: ", groceryItem)
       //this adds the grocery item to the groceryItems for the meal
       listsCtx.addList(groceryItem);
     }catch(error){
@@ -155,7 +155,7 @@ function updateCtxList(updatedGrocery,id){
   }
   
   function deleteCtxList(groceryItem){
-    console.log("ManageMeal delete groceryItem: ",groceryItem)
+    //console.log("ManageMeal delete groceryItem: ",groceryItem)
     const currentMeal = mealsCtx.meals.find((meal) => meal.id === editedMealId)
     if(currentMeal){
       const updatedGroceries1 = currentMeal.groceryitems.filter(grocery => grocery.thisId !== groceryItem.thisId);
@@ -181,7 +181,7 @@ function updateCtxList(updatedGrocery,id){
   }
 
   function addCtxMeal(updatedMeal,mealId){
-    console.log("ManageMeal addCtxMeal: ",updatedMeal)
+    //console.log("ManageMeal addCtxMeal: ",updatedMeal)
     //updates state for current sheet
     setTheMeal(updatedMeal);
     //This adds the meal to the Context in the app
@@ -195,7 +195,7 @@ function updateCtxList(updatedGrocery,id){
     setIsSubmitting(true);
     try {
       if (isEditing) {
-        console.log("ManageMeal updatinging.  noGroceries:",noGroceries);
+        //console.log("ManageMeal updatinging.  noGroceries:",noGroceries);
         //array.length = 0;//This resets the grocery array.
         //setNewGroceryItem([]);
         updateMeal(mealData.id, mealData, theMeal, noGroceries);
@@ -204,12 +204,12 @@ function updateCtxList(updatedGrocery,id){
         //also must add meal to ctx and add groceries to ctx.
         navigation.goBack();
       } else {
-        console.log("ManageMeal adding");
+        //console.log("ManageMeal adding");
         const id = await storeMeal(mealData,addCtxList,addCtxMeal);//This adds the meal to firebase
-        console.log("ManageMeal finishes adding")
+        //console.log("ManageMeal finishes adding")
         theID = id;
         mealsCtx.dates.push(mealData.date);
-        console.log("Made it to savePromises")
+        //console.log("Made it to savePromises")
         //await Promise.all(savePromises);
         navigation.goBack();
       }

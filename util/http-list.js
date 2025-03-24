@@ -40,7 +40,7 @@ export async function fetchLists() {
   // const lists = [...listsUnsorted,].sort((a, b) => a.date - b.date);
    //console.log("grocery list: ",listsUnsorted);
   // console.log( lists);
-  return listsUnsorted;
+  return listsUnsorted.reverse();
 }
 
 export function updateList(id, listData) {

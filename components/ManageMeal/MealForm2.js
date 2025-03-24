@@ -299,7 +299,7 @@ export default function MealForm2({ initialMeal = {}, defaultDate, onSubmit, sub
 
   function saveMeal(meal2){
     let noGroceries = false;
-    console.log("Makes it to saveMeal in MealForm2",meal2);
+    //console.log("Makes it to saveMeal in MealForm2",meal2);
     if(!meal2.date||!meal2.description.trim()){
       Alert.alert("Both description and date are required!");
     }else{

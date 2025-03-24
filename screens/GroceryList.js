@@ -65,6 +65,7 @@ function GroceryList() {
   useFocusEffect(
     useCallback(() => {
       setFirstTime(true);
+      setIsFetching(true);
     }, [])
   );
 
@@ -85,6 +86,7 @@ function GroceryList() {
   if(firstTime===true){
     console.log("GroceryList firstTime")
     setFirstTime(false);
+    console.log("GroceryList firstTime2")
     getLists();
   }
 
@@ -92,8 +94,7 @@ function GroceryList() {
     //console.log("GroceryList items:",listsCtx.lists)
     //setRecentLists(listsCtx.lists);
     try {
-      setIsFetching(true);
-      console.log("Makes it to useEffect");
+      console.log("Makes it to getLists");
       const items = await fetchLists();
       console.log("Grocery items list in GroceryList: ")
 
@@ -103,12 +104,13 @@ function GroceryList() {
         let allItems = [];
 
         items.map((item)=>{
-          //console.log("RecentMeals mapped group:",meal)
+          
           if(item.group === result){
+            console.log("GroceryList getLists item:",item)
             allItems.push(item);
           }
         })
-        // console.log("RecentMeals allItems:",allItems);
+        console.log("GroceryList allItems:",allItems);
         // console.log("RecentMeals typeOf:",typeof allItems)
         if(typeof allItems ==='object'){
         

@@ -225,7 +225,7 @@ function updateCtxList(updatedGrocery,id){
 
   async function updateGroceryItem(item,mealIds,mealData){
     const item2={
-      ...item, mealId: mealIds, mealDesc: mealData.description, group: groupUsing?groupUsing:mealData.group
+      ...item, mealId: mealIds, mealDesc: mealData.description, group: mealData.group?mealData.group:groupUsing
     }
     console.log("http updateGroceryItem update/add:", item2);
     //the next lines of code are for grocery items that do exist already.
@@ -471,7 +471,7 @@ function updateCtxList(updatedGrocery,id){
         id: mealData.id,
         date: newDate,
         description: mealData.description,
-        group: groupUsing?groupUsing:mealData.group,
+        group: mealData.group?mealData.group:groupUsing,
         groceryItems: groceryList
       };
       //updates the context for meals with the updated meal info

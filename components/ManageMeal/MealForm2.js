@@ -1,4 +1,4 @@
-import React, { useState, useContext, useEffect } from "react";
+import React, { useState, useContext, useEffect } from "react";//useRef
 import { View, TextInput, FlatList, Text, Pressable, Alert, ActivityIndicator, Modal } from "react-native";
 import { MaterialIcons } from "@expo/vector-icons";
 //import DatePicker from "react-native-date-picker";
@@ -47,6 +47,8 @@ export default function MealForm2({ initialMeal = {}, defaultDate, onSubmit, sub
 
   const mealsCtx = useContext(MealsContext);
   const listsCtx = useContext(ListsContext);
+
+  //const inputRef = useRef(null); // Create a ref
 
   //This only runs once when the screen starts up.
   useEffect(() => {
@@ -436,7 +438,9 @@ export default function MealForm2({ initialMeal = {}, defaultDate, onSubmit, sub
       setEditableOr(true);
       setPencilColor("green");
     }
-    
+    // if (inputRef.current) {
+    //   inputRef.current.focus(); // Focus the TextInput
+    // }
   }
 
   function add1GroceryItem(){
@@ -478,6 +482,7 @@ export default function MealForm2({ initialMeal = {}, defaultDate, onSubmit, sub
         <View style={styles.inputContainer}>
           
           <TextInput style={[styles.inputDate,styles.inputAll]}
+            //ref={inputRef} // Attach ref to TextInput
             keyboardType='decimal-pad'
             placeholder='yyyy-mm-dd'
             editable={editableOr}

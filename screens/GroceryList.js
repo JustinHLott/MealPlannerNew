@@ -70,8 +70,8 @@ function GroceryList() {
 
   async function pullGroupChosen(){
     const accountTypeChosen = await getValue(emailAddress+"groupChosen");
-    console.log("GroceryList pullGroupChosen:",groupUsing?groupUsing:accountTypeChosen)
-    return groupUsing?groupUsing:accountTypeChosen;
+    console.log("GroceryList pullGroupChosen:",accountTypeChosen?accountTypeChosen:groupUsing)
+    return accountTypeChosen?accountTypeChosen:groupUsing;
   };
 
   // function removePrefix(text="", prefix=""){

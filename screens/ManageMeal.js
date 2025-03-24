@@ -309,6 +309,8 @@ function updateCtxList(updatedGrocery,id){
     let groceryItem3;
     console.log("ManageMeal noGroceries",noGroceries);
     console.log("ManageMeal mealData",mealData);
+    console.log("ManageMeal mealData.group",mealData.group);
+    console.log("ManageMeal groupUsing",groupUsing);
     console.log("ManageMeal previousMealData",previousMealData);
     //if there are grocery items on the new meal
     if(noGroceries===false){
@@ -341,7 +343,7 @@ function updateCtxList(updatedGrocery,id){
                   ...groceryItem1,mealId: mealIds
                 }
                 groceryItem1 = {
-                  ...groceryItem1,group: groupUsing?groupUsing:mealData.group
+                  ...groceryItem1,group: mealData.group?mealData.group:groupUsing
                 }
                 //Add new roceryData to new array
                 newGroceryList.push(groceryItem1);
@@ -368,7 +370,7 @@ function updateCtxList(updatedGrocery,id){
                   ...groceryItem2,mealId: mealIds
                 }
                 groceryItem2 = {
-                  ...groceryItem2,group: groupUsing?groupUsing:mealData.group
+                  ...groceryItem2,group: mealData.group?mealData.group:groupUsing
                 }
                 //Add updated groceryData to new array
                 newGroceryList.push(groceryItem2);
@@ -400,7 +402,7 @@ function updateCtxList(updatedGrocery,id){
                   ...groceryItem3,mealId: mealIds
                 }
                 groceryItem3 = {
-                  ...groceryItem3,group: groupUsing?groupUsing:mealData.group
+                  ...groceryItem3,group: mealData.group?mealData.group:groupUsing
                 }
                 //Add groceryData to new array
                 newGroceryList.push(groceryItem3);

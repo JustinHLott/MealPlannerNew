@@ -205,7 +205,8 @@ export default function Settings({ route, navigation }){
       const theGroup = theGroups.filter((item) => item.email === emailAddress && item.group === emailAddress);
       console.log("TheGroup",theGroup[0].id)
       await storeValue(emailAddress+"groupChosen",theGroup[0].id);
-      //console.log("Settings fetched group:",group);
+      setGroupUsing(theGroup[0].id);
+      console.log("Settings fetched groupUsing:",groupUsing);
 
   }
 
@@ -217,8 +218,16 @@ export default function Settings({ route, navigation }){
           setGroup(theGroups.filter((item) => item.email === emailAddress && item.group === emailAddress));
           //filters groups to only see those that have your email & excludes your personal group.
           const allGroups = Object.keys(theGroups)
-          .map((key) => ({ id: key, ...theGroups[key] }))
+          .map((key) => 
+            ({ id: key, ...theGroups[key] }))
           .filter((group1) => group1.email === emailAddress && group1.group !== group1.email);
+
+          //// groupUsing is set when you select a group, not account type.
+          // allGroups.forEach((item,index)=>{
+          //   setGroupUsing(item.group);
+          //   return;
+          // });
+          console.log("Settings fetched groupUsing:",groupUsing);
           //when false, all groups are shown.
           setGroupOrGroups(false);
           //set groups as all groups with my email.
@@ -243,8 +252,9 @@ export default function Settings({ route, navigation }){
         fetchGroup();//this is used to filter for your personal meals
         await storeValue(emailAddress+"accountTypeChosen","personal");
         await storeValue(emailAddress+"groupName",label);
+        
         //await storeValue(emailAddress+"groupChosen",emailAddress);  //Do this in SetGroup.
-        //setGroup(emailAddress);                                       //Do this in SetGroup.
+        //setGroup(emailAddress);//Do this in SetGroup.
         setSelectedGroupName(emailAddress);
     }
     setSelectedAccount(id);
@@ -382,6 +392,7 @@ export default function Settings({ route, navigation }){
   async function selectGroup(id,name,groupId){
       //set group in state
       setGroupId(groupId);
+      setGroupUsing(groupId);
       setSelectedGroupName(name);
       //set group in email context
       // setGroupUsing(id);//(it's not used anywhere else.)
@@ -394,6 +405,7 @@ export default function Settings({ route, navigation }){
   async function saveSettings(){
     //fetch meals & grocery items & filter for account.
     //fetch grocery items
+    setGroupUsing(group?group[0].groupId:groupUsing);
 
     try {
         //setFirstTime(true);

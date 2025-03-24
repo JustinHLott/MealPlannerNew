@@ -38,7 +38,7 @@ function RecentMeals() {
 
         pullGroupChosen()
         .then((result)=>{
-          //console.log("RecentMeals groupChosen:",result);
+          console.log("RecentMeals groupChosen:",result);
           //console.log("RecenetMeals groupUsing:",groupUsing);
           //if(result instanceof Promise){
           let allGroups = [];
@@ -51,7 +51,7 @@ function RecentMeals() {
               setNotHidden(true);
             }
           })
-          // console.log("RecentMeals allGroups:",allGroups);
+           console.log("RecentMeals allGroups:",allGroups);
           // console.log("RecentMeals typeOf:",typeof allGroups)
           if(typeof allGroups ==='object'){
           
@@ -70,6 +70,68 @@ function RecentMeals() {
 
     getMeals();
   }, []);
+
+  useFocusEffect(
+    useCallback(() => {
+      setFirstTime(true);
+      // setIsFetching(true);
+      // getMeals(); // Fetch meals every time screen is focused
+      // setIsFetching(false);
+    }, [])
+  );
+
+  if(firstTime===true){
+    console.log("RecentMeals firstTime")
+    setIsFetching(true);
+    setFirstTime(false);
+    getMeals();
+  }
+
+  async function getMeals(){
+    //console.log("RecentMeals isFocused")
+    setNotHidden(false);
+    const meals = await fetchMeals();
+    const groupUsing = pullGroupChosen()
+    .then((result)=>{
+      console.log("RecentMeals groupChosen:",result);
+      //if(result instanceof Promise){
+      let allGroups = [];
+
+      meals.map((meal)=>{
+        //console.log("RecentMeals mapped group:",meal.group)
+        if(meal.group === result){
+          
+          allGroups.push(meal);
+        }
+      })
+      console.log("RecentMeals allGroups:",allGroups);
+      // console.log("RecentMeals typeOf:",typeof allGroups)
+      if(typeof allGroups ==='object'){
+      
+        mealsCtx.setMeals(allGroups);
+        const mealsSorted = [...allGroups,].sort((a, b) => a.date - b.date);
+        console.log("RecentMeals meals:",mealsSorted);
+        const recentMeals1 = mealsSorted.filter((meal) => {
+          let firstDay = new Date(firstDate);
+          //console.log("Recent Meals firstDay:",firstDay);
+          let datePlus7 = getDateMinusDays(firstDay, -6);
+          //console.log("Recent Meals dayPlus7:",datePlus7);
+          let theMeals = (meal.date >= firstDay && meal.date <= datePlus7)
+          if(!theMeals){
+            setNotHidden(false);
+          }else{
+            setNotHidden(true);
+          }
+          //setTheFallbackText('No meals registered for dates ' + firstDay.toISOString().slice(0, 10) + ' to ' + datePlus7.toISOString().slice(0, 10));
+          //console.log("RecentMeals meals",theMeals)
+          return theMeals;
+        });
+
+        setRecentMeals(recentMeals1);
+        setIsFetching(false);
+      }
+    })
+  }
 
   async function pullGroupChosen(){
     //console.log("RecentMeals email:",emailAddress)
@@ -141,70 +203,7 @@ function RecentMeals() {
   //PREVIOUS,CURRENT,NEXT////////////////////////////////////////////////////////
 
 
-  if(firstTime===true){
-    console.log("RecentMeals firstTime")
-    setIsFetching(true);
-    setFirstTime(false);
-    getMeals();
-  }
-
-
-  async function getMeals(){
-    //console.log("RecentMeals isFocused")
-    setNotHidden(false);
-    const meals = await fetchMeals();
-    const groupUsing = pullGroupChosen()
-    .then((result)=>{
-      //console.log("RecentMeals groupChosen:",result);
-      //if(result instanceof Promise){
-      let allGroups = [];
-
-      meals.map((meal)=>{
-        //console.log("RecentMeals mapped group:",meal.group)
-        if(meal.group === result){
-          
-          allGroups.push(meal);
-        }
-      })
-      // console.log("RecentMeals allGroups:",allGroups);
-      // console.log("RecentMeals typeOf:",typeof allGroups)
-      if(typeof allGroups ==='object'){
-      
-        mealsCtx.setMeals(allGroups);
-        const mealsSorted = [...allGroups,].sort((a, b) => a.date - b.date);
-        //console.log("RecentMeals meals:",mealsSorted);
-        const recentMeals1 = mealsSorted.filter((meal) => {
-          let firstDay = new Date(firstDate);
-          //console.log("Recent Meals firstDay:",firstDay);
-          let datePlus7 = getDateMinusDays(firstDay, -6);
-          //console.log("Recent Meals dayPlus7:",datePlus7);
-          let theMeals = (meal.date >= firstDay && meal.date <= datePlus7)
-          if(!theMeals){
-            setNotHidden(false);
-          }else{
-            setNotHidden(true);
-          }
-          //setTheFallbackText('No meals registered for dates ' + firstDay.toISOString().slice(0, 10) + ' to ' + datePlus7.toISOString().slice(0, 10));
-          //console.log("RecentMeals meals",theMeals)
-          return theMeals;
-        });
-
-        setRecentMeals(recentMeals1);
-        setIsFetching(false);
-      }
-    })
-  }
-    
-
-
-  useFocusEffect(
-    useCallback(() => {
-      setFirstTime(true);
-      // setIsFetching(true);
-      // getMeals(); // Fetch meals every time screen is focused
-      // setIsFetching(false);
-    }, [])
-  );
+  
 
   function makeNotHidden(TF){
     setNotHidden(TF);

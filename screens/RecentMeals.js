@@ -93,7 +93,7 @@ function RecentMeals() {
     const meals = await fetchMeals();
     const groupUsing = pullGroupChosen()
     .then((result)=>{
-      console.log("RecentMeals groupChosen:",result);
+      //console.log("RecentMeals groupChosen:",result);
       //if(result instanceof Promise){
       let allGroups = [];
 
@@ -104,13 +104,13 @@ function RecentMeals() {
           allGroups.push(meal);
         }
       })
-      console.log("RecentMeals allGroups:",allGroups);
+      //console.log("RecentMeals allGroups:",allGroups);
       // console.log("RecentMeals typeOf:",typeof allGroups)
       if(typeof allGroups ==='object'){
       
         mealsCtx.setMeals(allGroups);
         const mealsSorted = [...allGroups,].sort((a, b) => a.date - b.date);
-        console.log("RecentMeals meals:",mealsSorted);
+        //console.log("RecentMeals meals:",mealsSorted);
         const recentMeals1 = mealsSorted.filter((meal) => {
           let firstDay = new Date(firstDate);
           //console.log("Recent Meals firstDay:",firstDay);
@@ -180,7 +180,7 @@ function RecentMeals() {
     //console.log(mealsCtx.dates)
     //const today = getDateMinusDays(new Date(),1);
     const today = getSundayOfThisWeek();
-    console.log("today",today)
+    //console.log("today",today)
     setFirstDate(today);
   }
   function next(){

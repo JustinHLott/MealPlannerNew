@@ -462,6 +462,13 @@ export default function MealForm2({ initialMeal = {}, defaultDate, onSubmit, sub
     setModalVisible(false); // Close modal after adding meal.
   };
 
+  function handleCancelAddGroceryItem(){
+    //hide the modal
+    setModalVisible(false);
+    //loop through the grocery items and delete the empty one.
+    
+  }
+
   if (isLoading) {
     return (
       <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
@@ -566,7 +573,7 @@ export default function MealForm2({ initialMeal = {}, defaultDate, onSubmit, sub
               onChangeText={(text) => handleGroceryChange(index, "description", text)}
               value={item.description}
             />
-            <TextInput style={{width:0,height: 35}}
+            <TextInput style={{width:0,height: 40}}
               keyboardType='default'
               placeholder="Grocery Item Id"
               maxLength={20}
@@ -618,7 +625,7 @@ export default function MealForm2({ initialMeal = {}, defaultDate, onSubmit, sub
                   onPress={()=>handleAddMeal({checkedOff:"", qty: qty, description: groceryDescription, group: group?group:groupUsing})}
                   style={{marginTop:8}}
                   >Back to {submitButtonLabel}</Button>
-                <Button style={{marginLeft:8,marginTop:8}} onPress={() => setModalVisible(false)}>Cancel</Button>
+                <Button style={{marginLeft:8,marginTop:8}} onPress={() => handleCancelAddGroceryItem()}>Cancel</Button>
               </View>
             </View>
           </View>
@@ -647,9 +654,8 @@ const styles = {
   container: { flex: 1, justifyContent: 'center', alignItems: 'center',backgroundColor: GlobalStyles.colors.primary100, },
   modalContainer: { flex: 1, justifyContent: 'center', alignItems: 'center', backgroundColor: 'rgba(0,0,0,0.5)' },
   modalContent: { width: 300, padding: 20, backgroundColor: GlobalStyles.colors.primary50, borderRadius: 10 },
-  input2: { width: "85%",borderBottomWidth: 1, marginBottom: 4, padding: 5 },
-  inputQty2: { width: '15%', height: 35, marginRight: 8,
-  },
+  input2: { width: "85%",borderBottomWidth: 1, marginBottom: 4, padding: 5, height: 45 },
+  inputQty2: { width: '15%', height: 38, marginRight: 8,marginBottom: 3  },
   inputAll2: {
     //backgroundColor: GlobalStyles.colors.primary100,
     color: GlobalStyles.colors.primary700,
@@ -705,6 +711,7 @@ const styles = {
     borderRadius: 6,
     fontSize: 18,
     marginTop: 4,
+    height: 40,
   },
   buttons:{flexDirection:'row',justifyContent: 'center'},
   checkboxContainer: {

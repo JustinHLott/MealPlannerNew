@@ -202,6 +202,7 @@ function GroceryItem({ itemData }) {
         date: theMeal.date,
         description: theMeal.description,
         id: theMeal.id,
+        group: theMeal.group,
         groceryItems: newGroceryList,
       }
     }else{
@@ -210,6 +211,7 @@ function GroceryItem({ itemData }) {
         date: theMeal.date,
         description: theMeal.description,
         id: theMeal.id,
+        group: theMeal.group,
         groceryItems: []
       }
     }

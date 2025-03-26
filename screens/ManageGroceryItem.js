@@ -157,6 +157,8 @@ async function deleteGroceryHandler() {
 
     let updatedMeal;
     let noGroceries;
+    console.log("ManageGroceryItem group:",group);
+    console.log("ManageGroceryItem groupUsing:",groupUsing);
     if(newGroceryList.length>0){
       updatedMeal={
         date: theMeal.date,
@@ -176,9 +178,9 @@ async function deleteGroceryHandler() {
       }
     }
     
-    const currentMealData = mealsCtx.meals.find(
-      (meal) => meal.id === thisId
-    );
+    // const currentMealData = mealsCtx.meals.find(
+    //   (meal) => meal.id === thisId
+    // );
 
     console.log("ManageGroceryItem updatedMeal: ",updatedMeal)
     //update meal in firebase

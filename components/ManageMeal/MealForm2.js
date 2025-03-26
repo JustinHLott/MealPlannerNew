@@ -397,6 +397,7 @@ export default function MealForm2({ initialMeal = {}, defaultDate, onSubmit, sub
         date: new Date(theMeal.date),
         description: theMeal.description,
         id: theMeal.id,
+        group: group?group:groupUsing,
         groceryItems: newGroceryList,
       }
     }else{
@@ -405,6 +406,7 @@ export default function MealForm2({ initialMeal = {}, defaultDate, onSubmit, sub
         date: new Date(theMeal.date),
         description: theMeal.description,
         id: theMeal.id,
+        group: group?group:groupUsing,
         groceryItems: [],
       }
     }
@@ -466,7 +468,7 @@ export default function MealForm2({ initialMeal = {}, defaultDate, onSubmit, sub
     //hide the modal
     setModalVisible(false);
     //loop through the grocery items and delete the empty one.
-    
+
   }
 
   if (isLoading) {

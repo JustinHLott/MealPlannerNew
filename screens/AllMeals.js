@@ -106,6 +106,9 @@ function AllMeals() {
     
   };
 
+  function getGroupId(){
+    //blank function needed so that MealsOutput will have the correct number of inputs.
+  }
   // if (error && !isFetching) {
   //   return <ErrorOverlay message={error} />;
   // }
@@ -118,6 +121,7 @@ function AllMeals() {
     <MealsOutput
       meals={meals}
       fallbackText="No meals found..."
+      getGroupId = {getGroupId}
     />
   );
 }

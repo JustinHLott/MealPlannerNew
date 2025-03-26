@@ -8,7 +8,7 @@ import LoadingOverlay from '../components/UI/LoadingOverlay';
 import { GlobalStyles } from '../constants/styles';
 import { MealsContext } from '../store/meals-context';
 import { getDateMinusDays } from '../util/date';
-import { fetchMeals } from '../util/http';
+import { fetchMeals, fetchGroupId } from '../util/http';
 import IconButtonNoText from '../components/UI/IconButtonNoText';
 import Button from '../components/UI/Button';
 import { getValue} from '../util/useAsyncStorage';
@@ -70,6 +70,19 @@ function RecentMeals() {
 
     getMeals();
   }, []);
+
+  async function getGroupId(){
+    const theGroupId = fetchGroupId(emailAddress)
+    .then(
+      console.log("RecentMeals getGroupId:",theGroupId)
+    );
+    pullGroupChosen()
+    .then((result)=>{
+      console.log("RecentMeals getGroupId result2:",result);
+      setGroupUsing(result);
+    },[])
+    
+  }
 
   useFocusEffect(
     useCallback(() => {
@@ -240,6 +253,7 @@ function RecentMeals() {
       <MealsOutput
         meals={recentMeals}
         fallbackText={theFallbackText}
+        getGroupId = {getGroupId}
         //makeNotHidden={makeNotHidden}
       />
     </View>

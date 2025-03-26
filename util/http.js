@@ -7,6 +7,7 @@ import axios from 'axios';
 //import { ListsContext } from '../store/lists-context';
 //axiosRetry(axios, { retries: 5, retryDelay: (retryCount) => retryCount * 1000 });
 //const axiosInstance = axios.create();
+import storeValue from './useAsyncStorage';
 
 const BACKEND_URL =
   'https://justinhlottcapstone-default-rtdb.firebaseio.com';
@@ -24,6 +25,30 @@ export async function storeUser(userData) {
   const response = await axios.post(BACKEND_URL + '/users.json', userData);
   const id = response.data.name;
   return id;
+}
+
+export async function fetchGroupId(email) {
+  const response = await axios.get(BACKEND_URL + '/groups.json');
+  let theGroupId = "NoGroupId"
+  console.log("Http fetchGroupId made it", email);
+  try{
+    //loop through the response to add data to array
+    for (const key in response.data) {
+      //console.log("Http fetchGroup:",response.data[key].group);
+      if(response.data&&response.data[key].group === email){
+        theGroupId =  response.data[key].id;
+        
+        //await storeValue(email + 'groupChosen', theGroupId);
+        console.log("Http fetchGroupId:",theGroupId);
+        return theGroupId;
+      }
+    }
+    return theGroupId
+  }catch(error){
+    console.error("Http fetchGroupId error:",error)
+  }
+
+  
 }
 
 export async function storeMeal(mealData,addCtxList,addCtxMeal) {

@@ -524,7 +524,7 @@ function updateCtxList(updatedGrocery,id){
           submitButtonLabel={isEditing ? 'Update' : 'Save Meal'}
         />
         {/*This deletes the meal*/}
-         {/* {isEditing && (
+         {isEditing && (
           <View style={styles.deleteContainer}>
             <IconButton
               icon="trash"
@@ -533,7 +533,7 @@ function updateCtxList(updatedGrocery,id){
               onPress={deleteMealHandler}
             />
           </View>
-        )} */}
+        )}
         
       </ScrollView>
       <Footer/>

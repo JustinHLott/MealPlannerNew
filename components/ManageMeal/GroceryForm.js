@@ -153,7 +153,7 @@ function GroceryForm({ submitButtonLabel, onCancel, onSubmit, defaultValues, gro
             value={date}
           />
         </View>
-        {/* <Text style={styles.label}>Meal ID</Text>
+        <Text style={styles.label}>Meal ID</Text>
         <View style={styles.inputContainer}>
           <TextInput style={[styles.inputDate,styles.inputAll]}
             placeholder='No meal ID'
@@ -168,7 +168,7 @@ function GroceryForm({ submitButtonLabel, onCancel, onSubmit, defaultValues, gro
             editable={false}
             value={inputs.thisId.value}
           />
-        </View> */}
+        </View>
         <Input
           style={styles.rowInput}
           label="Quantity"

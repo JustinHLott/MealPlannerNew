@@ -386,7 +386,15 @@ export default function MealForm2({ initialMeal = {}, defaultDate, onSubmit, sub
     theMeal.groceryItems.map((item) => {
       //This adds back all grocery items but the one with thisId
       if(item.thisId !== thisId){
-        newGroceryList.push({ description: item.description, qty: item.qty, checkedOff: item.checkedOff, mealId: item.mealId,thisId: item.thisId, id:item.id?item.id:item.thisId,group: group?group:groupUsing });
+        newGroceryList.push({ 
+          description: item.description, 
+          qty: item.qty, 
+          checkedOff: item.checkedOff, 
+          mealId: item.mealId,
+          mealDesc: theMeal.description,
+          thisId: item.thisId, 
+          id:item.id?item.id:item.thisId,
+          group: group?group:groupUsing });
       }
     });
 
@@ -624,7 +632,7 @@ export default function MealForm2({ initialMeal = {}, defaultDate, onSubmit, sub
               
               <View style={styles.buttons}>
                 <Button 
-                  onPress={()=>handleAddMeal({checkedOff:"", qty: qty, description: groceryDescription, group: group?group:groupUsing})}
+                  onPress={()=>handleAddMeal({checkedOff:"", qty: qty, description: groceryDescription, group: group?group:groupUsing, mealDesc: meal.description})}
                   style={{marginTop:8}}
                   >Back to {submitButtonLabel}</Button>
                 <Button style={{marginLeft:8,marginTop:8}} onPress={() => handleCancelAddGroceryItem()}>Cancel</Button>

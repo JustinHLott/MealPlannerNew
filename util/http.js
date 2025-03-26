@@ -39,7 +39,7 @@ export async function storeMeal(mealData,addCtxList,addCtxMeal) {
           qty: item.qty,
           checkedOff: item.checkedOff,
           mealId: response.data.name,
-          mealDesc: mealData.description,
+          mealDesc: item.mealDesc,
           group: mealData.group,
         };
         //console.log("http storeMeal groceryItem: ",groceryData);
@@ -56,7 +56,7 @@ export async function storeMeal(mealData,addCtxList,addCtxMeal) {
             ...item,
             thisId: responseGrocery.data.name,
             mealId: response.data.name,
-            mealDesc: mealData.decription,
+            //mealDesc: mealData.decription,
           };
           // const updatedGrocery = {
           //   ...groceryData,
@@ -73,6 +73,7 @@ export async function storeMeal(mealData,addCtxList,addCtxMeal) {
         //update meal with new grocery list
         console.log("mealData http: ",mealData)
         const updatedMeal1 = {...mealData, groceryItems: newGroceryList,};
+        console.log("http storeMeal updatedMeal1: ",updatedMeal1)
         
         //Subtract one day from original date
         const newDate1 = getDateMinusDays(mealData.date,-1);

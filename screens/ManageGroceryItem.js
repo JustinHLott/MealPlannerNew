@@ -212,7 +212,15 @@ async function deleteGroceryHandler() {
           currentCtxMeal.groceryItems.map((item) => {
             //This adds back all grocery items but the one with thisId
             if(item.thisId !== groceryItem.thisId){
-                newGroceryList.push({ description: item.description, qty: item.qty, checkedOff: item.checkedOff, mealId: item.mealId,thisId: item.thisId, id:item.id,group:group?group:groupUsing});
+                newGroceryList.push({ 
+                  description: item.description, 
+                  qty: item.qty, 
+                  checkedOff: item.checkedOff, 
+                  mealId: item.mealId,
+                  mealDesc: groceryData.mealDesc,
+                  thisId: item.thisId, 
+                  id:item.id,
+                  group:group?group:groupUsing});
             }
           });
 

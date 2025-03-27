@@ -64,7 +64,7 @@ function AllMeals() {
     }
     
     //.then((result)=>{
-      console.log("AllMeals groupChosen:",result);
+      //console.log("AllMeals groupChosen:",result);
       //if(result instanceof Promise){
       let allTheMeals = [];
       try{
@@ -74,7 +74,7 @@ function AllMeals() {
             allTheMeals.push(meal);
           }
         })
-        console.log("AllMeals allGroups:",allTheMeals);
+        //console.log("AllMeals allGroups:",allTheMeals);
         //console.log("All meals typeOf:",typeof allGroups)
         if(typeof allTheMeals ==='object'){
           //This sorts the meals by the date field.
@@ -91,8 +91,8 @@ function AllMeals() {
   }
 
   async function pullGroupChosen(){
-    console.log("Made it to pullgroupchosen");
-    console.log("email address:",emailAddress);
+    //console.log("Made it to pullgroupchosen");
+    //console.log("email address:",emailAddress);
     let accountTypeChosen="";
     try{
       accountTypeChosen = await getValue(emailAddress+"groupChosen");
@@ -100,7 +100,7 @@ function AllMeals() {
       console.error("AllMeals pullGroupChosen error:",error);
     }
     
-    console.log("AllMeals pullgroupchosen:", accountTypeChosen);
+    //console.log("AllMeals pullgroupchosen:", accountTypeChosen);
     setIsFetching(true);
     return accountTypeChosen;
     

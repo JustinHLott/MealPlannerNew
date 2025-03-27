@@ -59,6 +59,7 @@ export default function MealForm2({ initialMeal = {}, defaultDate, onSubmit, sub
       setIsAddGroceryVisible(false);
       setIsNewGroceryVisible(true);
     }
+    //if the initial meal is actually a meal and not a new meal with dummy info...
     if(typeof initialMeal.description!=="undefined"){
       //do nothing
       console.log("MealForm2 useEffect defined:",initialMeal);
@@ -251,7 +252,7 @@ export default function MealForm2({ initialMeal = {}, defaultDate, onSubmit, sub
   // Function to add a new grocery item
   const addGroceryItem = (theGroceryItem) => {
     //let theGroceryItem;
-    if(meal.groceryItems){//if grocery items already
+    if(meal.groceryItems&& meal.groceryItems.length > 0){//if grocery items already
       console.log("MealForm2 add meal.groceryItems:",meal.groceryItems);
       if(submitButtonLabel==="Update"){//if updating, you can only add one grocery item on update
         const theGroceryList = meal.groceryItems;
@@ -286,8 +287,8 @@ export default function MealForm2({ initialMeal = {}, defaultDate, onSubmit, sub
         console.log("MealForm2 after:",meal)
       }
     }
-    else{//if no grocery items
-      console.log("additionalGroceryItems 1st:",theGroceryItem)
+    else{//if no grocery items before adding the new grocery item
+      console.log("additionalGroceryItems 1st:",theGroceryItem);
       setMeal((prevMeal) => ({
         ...prevMeal,
         groceryItems: [{ ...theGroceryItem  }],
@@ -306,19 +307,19 @@ export default function MealForm2({ initialMeal = {}, defaultDate, onSubmit, sub
       Alert.alert("Both description and date are required!");
     }else{
       //console.log("MealForm2 saveMeal date:",meal2.date);
-      //console.log("MealForm2 updatedMeal: ",meal2);
+      console.log("MealForm2 updatedMeal: ",meal2);
       if(!meal2.groceryItems){
         noGroceries=true;
-        // console.log("MealForm2 noGroceries t: ",noGroceries);
+        console.log("MealForm2 noGroceries t: ",noGroceries);
       }else{
         if(meal2.groceryItems.length>0){
           noGroceries=false;
-          // console.log("MealForm2 noGroceries f: ",noGroceries);
-          // console.log("MealForm2 f grocery items: ",meal.groceryItems);
+          console.log("MealForm2 noGroceries f: ",noGroceries);
+          console.log("MealForm2 f grocery items: ",meal.groceryItems);
         }else{
           noGroceries=true;
-          // console.log("MealForm2 noGroceries f: ",noGroceries);
-          // console.log("MealForm2 f grocery items: ",meal.groceryItems);
+          console.log("MealForm2 noGroceries f: ",noGroceries);
+          console.log("MealForm2 f grocery items: ",meal.groceryItems);
         }
       }
       //this does Add or Update the meal in state to firebase
@@ -402,7 +403,7 @@ export default function MealForm2({ initialMeal = {}, defaultDate, onSubmit, sub
     let noGroceries;
     if(newGroceryList.length>0){
       updatedMeal={
-        date: new Date(theMeal.date),
+        date: getDateMinusDays(new Date(theMeal.date),-1),//date: new Date(theMeal.date),
         description: theMeal.description,
         id: theMeal.id,
         group: group?group:groupUsing,
@@ -411,7 +412,7 @@ export default function MealForm2({ initialMeal = {}, defaultDate, onSubmit, sub
     }else{
       noGroceries = true;
       updatedMeal={
-        date: new Date(theMeal.date),
+        date: getDateMinusDays(new Date(theMeal.date),-1),//date: new Date(theMeal.date),
         description: theMeal.description,
         id: theMeal.id,
         group: group?group:groupUsing,
@@ -419,9 +420,9 @@ export default function MealForm2({ initialMeal = {}, defaultDate, onSubmit, sub
       }
     }
     
-    const currentMealData = mealsCtx.meals.find(
-      (meal) => meal.id === thisId
-    );
+    // const currentMealData = mealsCtx.meals.find(
+    //   (meal) => meal.id === thisId
+    // );
 
     
     console.log("MealForm2 updatedMeal: ",updatedMeal)

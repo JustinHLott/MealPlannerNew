@@ -170,7 +170,7 @@ function updateCtxList(updatedGrocery,id){
       //update the state for the page.
       setTheMeal({
         id: currentMeal.id,
-        date: currentMeal.date,
+        date: getDateMinusDays(currentMeal.date-1),//Here is the problem.  I'm going to need to pass the new date also.
         description: currentMeal.description,
         group: groupUsing?groupUsing:currentMeal.group,
         groceryItems: updatedGroceries
@@ -188,6 +188,10 @@ function updateCtxList(updatedGrocery,id){
     mealsCtx.addMeal({ ...updatedMeal, id: mealId });
   }
 
+  function updateCtxMeal(){
+    //unused funtion
+  }
+
   async function confirmHandler(mealData, noGroceries) {
     //let noGroceries = true;
     console.log("Makes it to confirmHandler in ManageMeals")
@@ -195,7 +199,7 @@ function updateCtxList(updatedGrocery,id){
     setIsSubmitting(true);
     try {
       if (isEditing) {
-        //console.log("ManageMeal updatinging.  noGroceries:",noGroceries);
+        console.log("ManageMeal updatinging.  noGroceries:",noGroceries);
         //array.length = 0;//This resets the grocery array.
         //setNewGroceryItem([]);
         updateMeal(mealData.id, mealData, theMeal, noGroceries);
@@ -204,7 +208,7 @@ function updateCtxList(updatedGrocery,id){
         //also must add meal to ctx and add groceries to ctx.
         navigation.goBack();
       } else {
-        //console.log("ManageMeal adding");
+        console.log("ManageMeal adding");
         const id = await storeMeal(mealData,addCtxList,addCtxMeal);//This adds the meal to firebase
         //console.log("ManageMeal finishes adding")
         theID = id;
@@ -319,7 +323,7 @@ function updateCtxList(updatedGrocery,id){
       mealData.groceryItems.forEach((item,index)=>{
         //loop through all of the new grocery items
         console.log("ManageMeal updateMeal item:",typeof item.thisId);
-        //console.log("http updateMeal item.id:",item.thisId?item.thisId:item.id)
+        console.log("http updateMeal item.id:",item.thisId?item.thisId:item.id)
         
         //if there are no grocery items on the previous meal
         if(!previousMealData.groceryItems){
@@ -474,12 +478,13 @@ function updateCtxList(updatedGrocery,id){
         group: mealData.group?mealData.group:groupUsing,
         groceryItems: groceryList
       };
+      
+      //updates the meal in firebase
+      await updateMealRaw(mealId,currentMeal2);
       //updates the context for meals with the updated meal info
       mealsCtx.updateMeal(mealId,currentMeal2);
       //updates state for current sheet
       setTheMeal(currentMeal2);
-      //updates the meal in firebase
-      await updateMealRaw(mealId,currentMeal2);
       // axios.put(BACKEND_URL + `/meals3/${mealId}.json`, currentMeal2);
       console.log("ManageMeal updateCtxMeal firebase:",currentMeal2);
       //}

@@ -10,6 +10,7 @@ import { ListsContext } from '../../store/lists-context';
 import { MealsContext } from '../../store/meals-context';
 import { deleteList,updateList } from '../../util/http-list';
 import { updateMeal,updateMealRaw } from '../../util/http';
+import Delete from '../ManageMeal/Delete';
 //import { getFormattedDate } from '../../util/date';
 
 // const defaultMeal={
@@ -101,18 +102,24 @@ function GroceryItem({ itemData }) {
     });
   }
 
-    /////////////////////////////////////////////////////
-    function deleteFromGroceryCtx(thisId){
-      //console.log("GroceryIte before delete",groceriesCtx.lists)
-      // console.log("MealForm2 thisId",thisId)
-      const updatedGroceries1 = groceriesCtx.lists.filter(grocery => grocery.thisId !== thisId);
-      const updatedGroceries = updatedGroceries1.filter(grocery => grocery.id !== thisId);
-      groceriesCtx.setLists(updatedGroceries);
-      //console.log("GroceryItem after delete",updatedGroceries);
-    }
-    /////////////////////////////////////////////////////
+  /////////////////////////////////////////////////////
+  function deleteFromGroceryCtx(thisId){
+    //console.log("GroceryIte before delete",groceriesCtx.lists)
+    // console.log("MealForm2 thisId",thisId)
+    const updatedGroceries1 = groceriesCtx.lists.filter(grocery => grocery.thisId !== thisId);
+    const updatedGroceries = updatedGroceries1.filter(grocery => grocery.id !== thisId);
+    groceriesCtx.setLists(updatedGroceries);
+    //console.log("GroceryItem after delete",updatedGroceries);
+  }
+  /////////////////////////////////////////////////////
 
-  async function deleteGroceryHandler() {
+  function deleteGroceryHandler() {
+    setIsSubmitting(true);
+    const deletedItem = Delete(itemData.item)
+    setIsSubmitting(false);
+  }
+
+  async function deleteGroceryHandler2() {
     setIsSubmitting(true);
     try {
       //console.log("Made it to deleteGroceryHandler")

@@ -4,12 +4,11 @@ import { StyleSheet, Text, View, TextInput,Alert } from 'react-native';
 import { MealsContext } from '../../store/meals-context';
 import Input from './Input';
 import Button from '../UI/Button';
-//import { getFormattedDate } from '../../util/date';
 import { GlobalStyles } from '../../constants/styles';
 import { getFormattedDate } from "../../util/date";
 import { useEmail } from "../../store/email-context";
 
-//defaultMealDesc={selectedMeal.description}
+//This comes from the ManageGroceryItems sheet and is uses to add or edit grocery items.
 function GroceryForm({ submitButtonLabel, onCancel, onSubmit, defaultValues, group }) {
   //console.log("defaultValues in GroceryForm", defaultValues);
   const [date, setDate] = useState();
@@ -137,8 +136,6 @@ function GroceryForm({ submitButtonLabel, onCancel, onSubmit, defaultValues, gro
           <TextInput style={[styles.inputDate,styles.inputAll]}
             placeholder='No meal associated'
             editable={false}
-            //if it's a valid date, "validateDate" changes it to a text string.
-            //value={inputs.mealId.value}
             value={inputs.mealDesc.value}
           />
         </View>
@@ -148,8 +145,6 @@ function GroceryForm({ submitButtonLabel, onCancel, onSubmit, defaultValues, gro
           <TextInput style={[styles.inputDate,styles.inputAll]}
             placeholder='No Date'
             editable={false}
-            //if it's a valid date, "validateDate" changes it to a text string.
-            //value={inputs.mealId.value}
             value={date}
           />
         </View>

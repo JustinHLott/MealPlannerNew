@@ -2,6 +2,7 @@ import { View, StyleSheet, Text } from 'react-native';
 
 import { GlobalStyles } from '../../constants/styles';
 
+//This shows for errors
 function ErrorOverlay({ message }) {
   return (
     <View style={styles.container}>

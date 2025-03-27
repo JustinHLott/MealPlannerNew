@@ -1,6 +1,7 @@
 import { Pressable, StyleSheet, View } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 
+//This is used for the trash can delete buttons.
 function IconButtonNoText({ icon, size, color, onPress, forLongPress }) {
   return (
     <Pressable

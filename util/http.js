@@ -296,7 +296,6 @@ export function updateMeal(mealIds, mealData, previousMealData, addCtxList, upda
 
           //get a newId for the new grocery item
           const response = updateGroceryItem(item,addCtxList,updateCtxList,mealIds,updateCtxMeal,mealData)
-            //.then(response=>{
               let theId="";
               if(response.length > 20){
                 theId=response._j;
@@ -314,7 +313,6 @@ export function updateMeal(mealIds, mealData, previousMealData, addCtxList, upda
               }
               //Add new roceryData to new array
               newGroceryList.push(groceryItem1);
-            //})
         }catch(error){
           console.log("http !previousMealData.groceryItems error:",error);
         }
@@ -349,7 +347,6 @@ export function updateMeal(mealIds, mealData, previousMealData, addCtxList, upda
           console.log("http found undefined item:",item)
            //get a newId
             const response = updateGroceryItem(item,addCtxList,updateCtxList,mealIds,updateCtxMeal,mealData);
-            //.then(response=>{
               let theId="";
               if(response.length > 20){
                 theId=response._j;
@@ -366,7 +363,6 @@ export function updateMeal(mealIds, mealData, previousMealData, addCtxList, upda
               }
               //Add groceryData to new array
               newGroceryList.push(groceryItem3);
-            //});
         }
       }
     });
@@ -374,7 +370,6 @@ export function updateMeal(mealIds, mealData, previousMealData, addCtxList, upda
     //if there are grocery items on the previous meal
     try{
       if(previousMealData.groceryItems){
-      //if(previousMealData.groceryItems.length > 0){
       console.log("http delete")
         //delete old grocery items (in previous meal but not in new meal).
         previousMealData.groceryItems.forEach((item,index)=>{
@@ -395,7 +390,6 @@ export function updateMeal(mealIds, mealData, previousMealData, addCtxList, upda
     
   }
   console.log("http updateMeal new List:",newGroceryList);
-  //updateCtxMeal(newGroceryList,"1",mealIds,mealData);
   return newGroceryList;
 }
 

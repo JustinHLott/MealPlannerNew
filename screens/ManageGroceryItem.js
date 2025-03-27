@@ -30,7 +30,6 @@ function ManageGroceryItem({ route, navigation }) {
 
   const editedGroceryId = route.params?.groceryId;
   let meal = route.params?.meal;
-  //let groceryItem = route.params?.item;
   
   useFocusEffect(
       useCallback(() => {
@@ -39,7 +38,7 @@ function ManageGroceryItem({ route, navigation }) {
     );
 
   if(firstTime){
-    const groupUsing = pullGroupChosen()
+    pullGroupChosen()
     .then((result)=>{
       try{
         setGroup(result);
@@ -88,7 +87,6 @@ function ManageGroceryItem({ route, navigation }) {
   //DELETING/////////////////////////////////////////////////////
   function deleteFromGroceryCtx(thisId){
     //console.log("ManageGroceryItem before delete",groceriesCtx.lists)
-    // console.log("MealForm2 thisId",thisId)
     const updatedGroceries1 = groceriesCtx.lists.filter(grocery => grocery.thisId !== thisId);
     const updatedGroceries = updatedGroceries1.filter(grocery => grocery.id !== thisId);
     groceriesCtx.setLists(updatedGroceries);
@@ -107,13 +105,8 @@ async function deleteGroceryHandler() {
 
       //delete grocery item from grocery ctx
       deleteFromGroceryCtx(editedGroceryId)
-      //groceriesCtx.deleteList(itemData.item.id);
-
-      // // //update meal state
-      // const selectedList2 = groceriesCtx.lists.find(
-      //   (list) => list.id?list.id:list.thisId === editedGroceryId
-      // );
       //console.log("ManageGroceryItem groceryItem: ",groceryItem);
+
       //update mealsCtx
       if(groceryItem.mealId){
 
@@ -177,19 +170,13 @@ async function deleteGroceryHandler() {
         groceryItems:[]
       }
     }
-    
-    // const currentMealData = mealsCtx.meals.find(
-    //   (meal) => meal.id === thisId
-    // );
 
     console.log("ManageGroceryItem updatedMeal: ",updatedMeal)
     //update meal in firebase
     await updateMealRaw(updatedMeal.id,updatedMeal);
-    //await updateMeal(updatedMeal.id,updatedMeal,currentMealData, addCtxList, deleteCtxList, noGroceries)
-    //mealId, mealData,currentMealData, addCtxList, deleteCtxList,noGroceries
+
     //update meal in ctx
     mealsCtx.updateMeal(updatedMeal.id,updatedMeal)
-    //mealsCtx.updateMeal(thisId,updatedMeal)
   }
   //DELETING/////////////////////////////////////////////////////
 
@@ -290,7 +277,6 @@ async function deleteGroceryHandler() {
           onSubmit={confirmHandler}
           onCancel={cancelHandler}
           defaultValues={groceryItem}
-          //defaultMealDesc={meal?meal:""}
           group={group}
         />
         {isEditing && (

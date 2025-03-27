@@ -3,6 +3,7 @@ import { Ionicons } from '@expo/vector-icons';
 import { FontAwesome } from '@expo/vector-icons';
 import { GlobalStyles } from '../../constants/styles';
 
+//This is used for the drawers and the upper right buttons
 function IconButton({ icon, size, color, onPress, forLongPress, iconText, awesome }) {
   let iconType;
   if(awesome){

@@ -9,33 +9,25 @@ import LoadingOverlay from '../UI/LoadingOverlay'
 import { ListsContext } from '../../store/lists-context';
 import { MealsContext } from '../../store/meals-context';
 import { deleteList,updateList } from '../../util/http-list';
-import { updateMeal,updateMealRaw } from '../../util/http';
-import Delete from '../ManageMeal/Delete';
-//import { getFormattedDate } from '../../util/date';
+import { updateMealRaw } from '../../util/http';
 
-// const defaultMeal={
-//   id:"",
-//   date:"",
-//   description:"",
-//   groceryItems:[]
-// }
+//This comes from GroceryList.js/GroceriesOutput.js/GroceriesList.js
+//It is the individual grocery items.
 function GroceryItem({ itemData }) {
   const navigation = useNavigation();
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [error, setError] = useState();
   const [meal2, setMeal2] = useState();
-  //const [meal, setMeal] = useState(...defaultMeal);
-  //const isEditing = !!id;
 
   const groceriesCtx = useContext(ListsContext);
   const mealsCtx = useContext(MealsContext);
 
+  //This runs once when you first load the grocery item on the Grocery List
   useEffect(()=>{
     let selectedMeal;
     let selectedList;
     if(itemData.item.id){
       selectedList = groceriesCtx.lists.find(
-        //(list) => list.id?list.id:list.thisId === itemData.item.id?itemData.item.id:itemData.item.thisId
         (list) => list.id === itemData.item.id
       );
       //console.log("GroceryItem id: ",selectedList);
@@ -45,7 +37,6 @@ function GroceryItem({ itemData }) {
       );
     }else{
       selectedList = groceriesCtx.lists.find(
-        //(list) => list.id?list.id:list.thisId === itemData.item.id?itemData.item.id:itemData.item.thisId
         (list) => list.thisId === itemData.item.thisId
       );
       //console.log("GroceryItem thisId: ",selectedList);
@@ -84,7 +75,6 @@ function GroceryItem({ itemData }) {
 
   if(selectedMeal){
     //console.log("foundselectedMeal",selectedMeal.description);
-    //setMeal2(selectedMeal);
     //console.log("meal2: ", meal);
     selectedMeal = selectedMeal?.description;
   }else{
@@ -105,7 +95,6 @@ function GroceryItem({ itemData }) {
   /////////////////////////////////////////////////////
   function deleteFromGroceryCtx(thisId){
     //console.log("GroceryIte before delete",groceriesCtx.lists)
-    // console.log("MealForm2 thisId",thisId)
     const updatedGroceries1 = groceriesCtx.lists.filter(grocery => grocery.thisId !== thisId);
     const updatedGroceries = updatedGroceries1.filter(grocery => grocery.id !== thisId);
     groceriesCtx.setLists(updatedGroceries);
@@ -113,13 +102,7 @@ function GroceryItem({ itemData }) {
   }
   /////////////////////////////////////////////////////
 
-  function deleteGroceryHandler() {
-    setIsSubmitting(true);
-    const deletedItem = Delete(itemData.item)
-    setIsSubmitting(false);
-  }
-
-  async function deleteGroceryHandler2() {
+  async function deleteGroceryHandler() {
     setIsSubmitting(true);
     try {
       //console.log("Made it to deleteGroceryHandler")
@@ -141,7 +124,7 @@ function GroceryItem({ itemData }) {
             (meal) => meal.id === itemData.item.mealId
           );
           if(selectedMeal){
-            //console.log("MealForm2 selectedMeal",selectedMeal)
+            //console.log("GroceryItem selectedMeal",selectedMeal)
             await createMealWithoutGroceryItem(selectedMeal,itemData.item.id);
             console.log("GroceryItem delete Hi")
           }else{
@@ -160,7 +143,7 @@ function GroceryItem({ itemData }) {
             (meal) => meal.id === itemData.item.mealId
           );
           if(selectedMeal){
-            //console.log("MealForm2 selectedMeal",selectedMeal)
+            //console.log("GroceryItem selectedMeal",selectedMeal)
             await createMealWithoutGroceryItem(selectedMeal,itemData.item.thisId);
             console.log("GroceryItem delete Hi(no id)")
           }else{
@@ -175,14 +158,10 @@ function GroceryItem({ itemData }) {
 
         //delete grocery item from grocery ctx
         deleteFromGroceryCtx(itemData.item.thisId)
-            //groceriesCtx.deleteList(itemData.item.thisId);
-
-        // //update meal state
-        // deleteGroceryItem(itemData.item.id)
 
         //console.log("GroceryItem meals: ",mealsCtx.meals)
-        
       }
+      setIsSubmitting(false);
     } catch (error) {
       console.log(error)
       setError('Could not delete grocery list item - please try again later!');
@@ -222,10 +201,6 @@ function GroceryItem({ itemData }) {
         groceryItems: []
       }
     }
-    
-    // const currentMealData = mealsCtx.meals.find(
-    //   (meal) => meal.id === thisId
-    // );
 
     //update meal in ctx
     mealsCtx.updateMeal(theMeal.id,updatedMeal)
@@ -237,35 +212,6 @@ function GroceryItem({ itemData }) {
   }
   //DELETING/////////////////////////////////////////////////////
 
-  async function addCtxList(updatedGrocery,id){
-    try{
-      console.log("GroceryItems addCtxlist")
-      //setNewItemId(responseGrocery.data.name);
-      //console.log("ManageMeals newItemId: ", newItemId)
-      console.log("GroceryItems newItemId2: ", id)
-      const groceryItem={
-        ...updatedGrocery, thisId: id
-      };
-      //const groceryId = responseGrocery.data.name;
-      //updateList(responseGrocery.data.name,groceryItem);
-      await updateList(id,groceryItem);
-      groceriesCtx.addList(groceryItem);
-    }catch(error){
-      console.error("ManageMeal addCtxList Error:", error);
-    }
-  }
-
-  //this function is used in http where it cannot work with context.
-  function updateCtxMeal(id,mealData){
-    //update meal in context
-    mealsCtx.updateMeal(id,mealData);
-  }
-
-  function deleteCtxList(groceryItem){
-    console.log("GroceryItems delete groceryItem: ",groceryItem)
-    groceriesCtx.deleteList(groceryItem);
-  }
-
   if (error && !isSubmitting) {
     return <ErrorOverlay message={error} />
   }
@@ -274,9 +220,6 @@ function GroceryItem({ itemData }) {
     return <LoadingOverlay />;
   }
 
-  // function thaiCurry2(){
-  //   return thaiCurry;
-  // }
   return (
     <Pressable
       onPress={groceryPressHandler}
@@ -291,7 +234,6 @@ function GroceryItem({ itemData }) {
         </Text>
         <Text style={[styles.textBase, styles.mealDesc]}>
           {itemData.item.mealDesc?itemData.item.mealDesc:selectedMeal}
-          {/* {itemData.item.mealDesc?itemData.item.mealDesc:selectedMeal} */}
         </Text>
         { (
         <View style={styles.deleteContainer}>
@@ -333,20 +275,16 @@ const styles = StyleSheet.create({
   },
   qty: {
     fontSize: 16,
-    //marginBottom: 4,
     fontWeight: 'bold',
     width:'8%',
   },
   description: {
     fontSize: 16,
-    //marginBottom: 4,
     fontWeight: 'bold',
     width:'50%',
   },
   mealDesc: {
     fontSize: 12,
-    //marginBottom: 4,
-    //fontWeight: 'bold',
     color: GlobalStyles.colors.primary100,
     width:'35%',
   },
@@ -367,10 +305,5 @@ const styles = StyleSheet.create({
   deleteContainer: {
     marginBottom: 0,
     paddingBottom: 0,
-    //marginTop: 16,
-    //paddingTop: 8,
-    //borderTopWidth: 2,
-    //borderTopColor: GlobalStyles.colors.primary200,
-    //alignItems: 'center',
   },
 });

@@ -6,6 +6,7 @@ import GroceriesList from './GroceriesList';
 import { ListsContext } from '../../store/lists-context';
 import Footer from '../Footer';
 
+//This comes from GroceryList.js
 function GroceriesOutput({ groceries, fallbackText }) {
 
   const [theArray, setTheArray] = useState(groceries);

@@ -222,11 +222,6 @@ export default function Settings({ route, navigation }){
             ({ id: key, ...theGroups[key] }))
           .filter((group1) => group1.email === emailAddress && group1.group !== group1.email);
 
-          //// groupUsing is set when you select a group, not account type.
-          // allGroups.forEach((item,index)=>{
-          //   setGroupUsing(item.group);
-          //   return;
-          // });
           console.log("Settings fetched groupUsing:",groupUsing);
           //when false, all groups are shown.
           setGroupOrGroups(false);
@@ -252,9 +247,6 @@ export default function Settings({ route, navigation }){
         fetchGroup();//this is used to filter for your personal meals
         await storeValue(emailAddress+"accountTypeChosen","personal");
         await storeValue(emailAddress+"groupName",label);
-        
-        //await storeValue(emailAddress+"groupChosen",emailAddress);  //Do this in SetGroup.
-        //setGroup(emailAddress);//Do this in SetGroup.
         setSelectedGroupName(emailAddress);
     }
     setSelectedAccount(id);
@@ -301,8 +293,6 @@ export default function Settings({ route, navigation }){
       //groupId needs to be the shared id for the group.
       const newEmail2={...newEmailGroup,id: result?result:groupUsing};
       console.log("Settings newGroup2",newEmail2);
-      updateGroup(result, newEmail2);
-      //setAddNewEmail(false); 
     },[])
   }
 
@@ -390,16 +380,14 @@ export default function Settings({ route, navigation }){
 
   //select the group that will be used.
   async function selectGroup(id,name,groupId){
-      //set group in state
-      setGroupId(groupId);
-      setGroupUsing(groupId);
-      setSelectedGroupName(name);
-      //set group in email context
-      // setGroupUsing(id);//(it's not used anywhere else.)
-      // console.log("Settings group using:",groupUsing);
-      await storeValue(emailAddress+"groupChosen",groupId);
-      //console.log("Settings groupId:",groupId);
-      await storeValue(emailAddress+"groupName",name);
+    //set group in state
+    setGroupId(groupId);
+    setGroupUsing(groupId);
+    setSelectedGroupName(name);
+    //store data on phone
+    await storeValue(emailAddress+"groupChosen",groupId);
+    //console.log("Settings groupId:",groupId);
+    await storeValue(emailAddress+"groupName",name);
   }
 
   async function saveSettings(){
@@ -408,7 +396,6 @@ export default function Settings({ route, navigation }){
     setGroupUsing(group?group[0].groupId:groupUsing);
 
     try {
-        //setFirstTime(true);
         //console.log("Makes it to save settings");
         const items = await fetchLists();
         const meals = await fetchMeals();
@@ -458,7 +445,6 @@ export default function Settings({ route, navigation }){
   const memoizedGroup = useMemo(() => group, [group]); // Prevents re-renders if group hasn’t changed
   const memoizedGroups = useMemo(() => groups, [groups]); // Prevents re-renders if groups hasn’t changed
 
-  //const groupSelection = React.memo(({ groupOrGroups,memoizedGroup,memoizedGroups}) => {
   function groupSelection(groupOrGroups,memoizedGroup,memoizedGroups){
       return(
           <View>
@@ -508,22 +494,6 @@ export default function Settings({ route, navigation }){
           <Text style={[styles.textHeader2,{ paddingTop: 2, textDecorationLine: 'underline' }]}>{selectedGroupName}</Text>
           </View>
           <Text style={[styles.textHeader2,{ paddingTop: 0 }]}>NOTE: with personal account selected, only meals created by this account, {emailAddress}, will be visible.  With shared accounts, your meals will be created on the shared account and can be shared with others.</Text>
-          {/* <FlatList
-              data={accounts}
-              keyExtractor={(item) => item.id}
-              renderItem={({ item }) => (
-              <RadioButtonWithDelete
-                  label={item.label}
-                  //selected={selectedAccount === item.optionChosen}
-                  selected={item.id === selectedAccount}
-                  itemId={item.id}
-                  accountOrGroup={selectedAccount}
-                  onPress={() => chooseAccount(item.id,item.label)}
-                  //onDelete={() => deleteGroup(item.id)}
-                  deleteYN={false}
-              />
-              )}
-          /> */}
           {!seeScrollViews&&
             <Button style={{justifyContent:"left",alignItems:'left',marginLeft: 0,marginTop:5, marginBottom: 4}}
               onPress={()=>setSeeScrollViews(true)}>View Radio Buttons Again

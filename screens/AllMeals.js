@@ -11,27 +11,11 @@ import { getValue} from '../util/useAsyncStorage';
 
 function AllMeals() {
   const [isFetching, setIsFetching] = useState(false);
-  // const [error, setError] = useState();
   const [meals, setMeals] = useState(null);
   const [firstTime, setFirstTime] = useState(true);
   const { emailAddress, setEmailAddress } = useEmail();
-  //let mealsSorted;
   
   const mealsCtx = useContext(MealsContext);
-
-  // if(firstTime){
-  //   //This sorts the meals by the date field.
-  //   setMeals([...mealsCtx.meals,].sort((a, b) => b.date - a.date));
-  //   setFirstTime(false);
-  // };
-  // useFocusEffect(
-  //     useCallback(() => {
-  //       setFirstTime(true);
-  //       // setIsFetching(true);
-  //       // getMeals(); // Fetch meals every time screen is focused
-  //       // setIsFetching(false);
-  //     }, [])
-  //   );
 
   useFocusEffect(
     
@@ -62,32 +46,25 @@ function AllMeals() {
     }catch(error){
       console.error("catch:",error)
     }
-    
-    //.then((result)=>{
-      //console.log("AllMeals groupChosen:",result);
-      //if(result instanceof Promise){
-      let allTheMeals = [];
-      try{
-        allMeals.map((meal)=>{
-          //console.log("AllMeals mapped group:",meal)
-          if(meal.group === result){
-            allTheMeals.push(meal);
-          }
-        })
-        //console.log("AllMeals allGroups:",allTheMeals);
-        //console.log("All meals typeOf:",typeof allGroups)
-        if(typeof allTheMeals ==='object'){
-          //This sorts the meals by the date field.
-          setMeals([...allTheMeals,].sort((a, b) => b.date - a.date));
-              
-
-          //console.log("AllMeals meals:",meals);
-          }
-          
-        }catch(error){
-          console.log("AllMeals error:",error)
+    let allTheMeals = [];
+    try{
+      allMeals.map((meal)=>{
+        //console.log("AllMeals mapped group:",meal)
+        if(meal.group === result){
+          allTheMeals.push(meal);
         }
-    //})
+      })
+      //console.log("AllMeals allGroups:",allTheMeals);
+      //console.log("All meals typeOf:",typeof allGroups)
+      if(typeof allTheMeals ==='object'){
+        //This sorts the meals by the date field.
+        setMeals([...allTheMeals,].sort((a, b) => b.date - a.date));
+        //console.log("AllMeals meals:",meals);
+      }
+      
+    }catch(error){
+      console.log("AllMeals error:",error)
+    }
   }
 
   async function pullGroupChosen(){
@@ -109,13 +86,6 @@ function AllMeals() {
   function getGroupId(){
     //blank function needed so that MealsOutput will have the correct number of inputs.
   }
-  // if (error && !isFetching) {
-  //   return <ErrorOverlay message={error} />;
-  // }
-
-  // if (!isFetching) {
-  //   return <LoadingOverlay />;
-  // }
 
   return (
     <MealsOutput

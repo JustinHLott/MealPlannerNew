@@ -35,11 +35,6 @@ export async function fetchLists() {
     listsUnsorted.push(listObj);
     //console.log(listsUnsorted);
   }
-
-  // //This sorts the lists by the date field.
-  // const lists = [...listsUnsorted,].sort((a, b) => a.date - b.date);
-   //console.log("grocery list: ",listsUnsorted);
-  // console.log( lists);
   return listsUnsorted.reverse();
 }
 
@@ -48,9 +43,6 @@ export function updateList(id, listData) {
 }
 
 export function deleteList(id) {
-  //console.log("deletelist: ",id)
-  //delete from ctx
-  //deleteFromGroceryCtx(id)
   //delete from firebase
   return axios.delete(BACKEND_URL + `/grocery/${id}.json`);
 }

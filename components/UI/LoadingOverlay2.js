@@ -2,6 +2,7 @@ import { View, ActivityIndicator, StyleSheet, Image } from 'react-native';
 
 import { GlobalStyles } from '../../constants/styles';
 
+//Used on the App sheet for loading icon.
 function LoadingOverlay() {
   return (
     <View style={styles.container}>

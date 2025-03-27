@@ -4,8 +4,7 @@ import { StatusBar } from 'expo-status-bar';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import { Ionicons, FontAwesome } from '@expo/vector-icons';
-import * as SplashScreen from 'expo-splash-screen';
+import { Ionicons } from '@expo/vector-icons';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 import LoginScreen from './screens/auth/LoginScreen';
@@ -188,7 +187,6 @@ export default function App() {
       <NavigationContainer>
         {!authCtx.isAuthenticated && <AuthStack />}
         {authCtx.isAuthenticated && <TabNavigator />}
-        {/* {authCtx.isAuthenticated && <WelcomeStack />} */}
       </NavigationContainer>
     );
   }
@@ -224,12 +222,10 @@ export default function App() {
       fetchToken();
     }, []);
   
+    //if it's still loading use loadingOverlay2 otherwise go to Navigation.
     if (isTryingLogin) {
-      //apploading makes sure that it prolongs the loading screen and doesn't flash the log in screen.
-      //return <AppLoading />;
       return <LoadingOverlay2/>;
     }
-    //SplashScreen.hideAsync();
     return <Navigation />;
   }
 

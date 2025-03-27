@@ -92,7 +92,6 @@ function GroceryList() {
 
   async function getLists() {
     //console.log("GroceryList items:",listsCtx.lists)
-    //setRecentLists(listsCtx.lists);
     try {
       console.log("Makes it to getLists");
       const items = await fetchLists();
@@ -120,14 +119,10 @@ function GroceryList() {
           //console.log("RecentMeals meals:",mealsCtx.meals);
         }
       })
-      //listsCtx.setLists(items);
-      
     } catch (error) {
       console.log(error);
       setError('Could not fetch lists!');
-    } finally {
-      
-    }
+    } 
   }
 //Ensure reload of lists////////////////////////////////////////////////////
 
@@ -162,7 +157,6 @@ function GroceryList() {
   return (
     <GroceriesOutput
       groceries={recentLists}
-      //groceries={listsCtx.lists}
       fallbackText="No grocery items..."
     />
   );

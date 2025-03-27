@@ -21,7 +21,6 @@ function listsReducer(state, action) {
       let sorted=[];
       if(action.payload.sortType==="item"){
         console.log("sort by item")
-        //sorted ={ ...state, lists: action.payload.lists.sort((a, b) => a.description.localeCompare(b.description))};
         sorted = { ...state, lists: action.payload.lists.sort((a, b) => {
           const nameA = a.description ? a.description.toLowerCase() : ''; // Convert to lowercase, handle undefined
           const nameB = b.description ? b.description.toLowerCase() : '';
@@ -29,7 +28,6 @@ function listsReducer(state, action) {
         })};
       }else if(action.payload.sortType==="meal"){
         console.log("sort by meal")
-        //sorted ={ ...state, lists: action.payload.lists.sort((a, b) => a.mealDesc.localeCompare(b.mealDesc))};
         sorted = { ...state, lists: action.payload.lists.sort((a, b) => {
           const nameA = a.mealDesc ? a.mealDesc.toLowerCase() : ''; // Convert to lowercase, handle undefined
           const nameB = b.mealDesc ? b.mealDesc.toLowerCase() : '';
@@ -37,7 +35,6 @@ function listsReducer(state, action) {
         })};
       }else if(action.payload.sortType==="default"){
         console.log("sort by default")
-        //sorted = { ...state, lists: action.payload.lists.reverse() };
         sorted = { ...state, lists: action.payload.lists.sort((a, b) => {
           const nameA = a.index ? a.index.toLowerCase() : ''; // Convert to lowercase, handle undefined
           const nameB = b.index ? b.index.toLowerCase() : '';
@@ -46,7 +43,6 @@ function listsReducer(state, action) {
       }
       return sorted;
     case 'SET':
-      //const inverted = { ...state, lists: action.payload.reverse() };
       const inverted = { ...state, lists: action.payload };
       return inverted;
     case 'UPDATE':
@@ -64,8 +60,6 @@ function listsReducer(state, action) {
         );
         const updatableList2 = state.lists[updatableListIndex2];
         const updatedItem2 = { ...updatableList2, ...action.payload.data };
-        // const updatedLists = [...state.lists];
-        // updatedLists[updatableListIndex] = updatedItem;
         return { ...state, lists: updatedItem2 };
     case 'DELETE':
       return { ...state, lists: state.lists.filter((list) => list.itemId !== action.payload) };

@@ -8,7 +8,6 @@ import { createUser } from '../../util/auth';
 import { GlobalStyles } from '../../constants/styles';
 import { storeGroup, updateGroup } from './Settings';
 import { useEmail } from '../../store/email-context';
-//import {storeValue} from '../../util/useAsyncStorage';
 import Footer from '../../components/Footer';
 
 //screen to sign up for the first time
@@ -68,8 +67,6 @@ function SignupScreen({navigation}) {
       } catch (error) {
         console.error("SignupScreen Error storing value:", error);
       }
-      //storeValue(emailAddress+"accountTypeChosen","personal");
-      //await storeValue(emailAddress+"groupChosen",id);
     }catch(error){
       console.log("SignupScreen createGroup error:",error);
     }
@@ -97,8 +94,8 @@ function SignupScreen({navigation}) {
   }
 
   return (
-    <View style={styles.topContainer}>
-      <View style={styles.container2}>
+    <View style={styles.container}>
+      <View style={styles.container}>
         <AuthContent isLogin={false} onAuthenticate={signupHandler} />
       </View>
       <View style={styles.footerView}>
@@ -111,19 +108,11 @@ function SignupScreen({navigation}) {
 export default SignupScreen;
 
 const styles = StyleSheet.create({
-  topContainer: {
-    flex: 1,
-    // justifyContent: 'center',
-    // alignItems: 'center',
-    //paddingHorizontal: 20,
-  },
-  container2:{
+  container: {
     flex: 1,
   },
   rootContainer: {
     flex: 1,
-    // justifyContent: 'center',
-    // alignItems: 'center',
     paddingHorizontal: 32,
     marginTop:100,
     marginBottom: 100,

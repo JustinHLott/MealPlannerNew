@@ -1,3 +1,4 @@
+//Color theme of bluish Purple, used throughout the app.
 export const GlobalStyles = {
   colors: {
     primary50: '#e4d9fd',

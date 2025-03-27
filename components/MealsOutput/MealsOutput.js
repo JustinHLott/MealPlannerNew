@@ -1,10 +1,9 @@
-import {useContext, useState} from 'react';
+import { useState} from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 
 import { GlobalStyles } from '../../constants/styles';
 import MealsList from './MealsList';
 import Footer from '../Footer';
-import { fetchGroupId } from '../../util/http';
 import { useEmail } from '../../store/email-context';
 //import { MealsContext } from '../../store/meals-context';
 

@@ -61,8 +61,6 @@ const LogOut = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    //justifyContent: 'center',
-    //alignItems: 'center',
     backgroundColor: GlobalStyles.colors.primary800,
     paddingHorizontal: 20
   },
@@ -73,7 +71,6 @@ const styles = StyleSheet.create({
   headerText: {
     color: GlobalStyles.colors.primary100,
     fontWeight:500,
-    //fontFamily:'atma-bold',
     fontSize:30,
     marginTop: 32,
     marginBottom: 20,
@@ -84,11 +81,9 @@ const styles = StyleSheet.create({
     backgroundColor: GlobalStyles.colors.primary500,
     flex:7,
     marginHorizontal: 0,
-    //alignItems: 'center',
   },
   text: {
     color: GlobalStyles.colors.primary50,
-    //fontFamily: 'atma',
     fontSize:16,
     paddingHorizontal: 20,
     paddingTop: 12,
@@ -104,7 +99,6 @@ const styles = StyleSheet.create({
   },
   button: {
     marginTop: 30,
-    //paddingHorizontal: 12,
     paddingVertical: 6,
     marginHorizontal: 90,
     flexDirection: 'row',

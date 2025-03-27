@@ -16,7 +16,6 @@ function LoginScreen() {
 
   const authCtx = useContext(AuthContext);
 
-  //const delay = (ms) => new Promise(resolve => setTimeout(resolve, ms));
   async function pullGroupChosen(){
     //console.log("RecentMeals email:",emailAddress)
     const accountTypeChosen = await getValue(emailAddress+"groupChosen");
@@ -40,7 +39,6 @@ function LoginScreen() {
 
     setIsAuthenticating(true);
     try {
-      //await delay(4000); // Wait for 4 seconds
       const token = await login(email, password);
       authCtx.authenticate(token);
       

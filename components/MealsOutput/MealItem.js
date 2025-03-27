@@ -24,7 +24,6 @@ function MealItem({ id, description, date, groceries }) {
       date2 = new Date(getDateMinusDays(date2,0));
     }else{
       date2 = new Date("1975-01-01");
-      // console.log('broken date');
       // console.log(date2);
     }
 
@@ -43,10 +42,6 @@ function MealItem({ id, description, date, groceries }) {
           <Text style={styles.textBase}>({getFormattedDate(date)})</Text>
         </View>  
         <Text style={[styles.textBase, styles.description]}>{description}</Text>
-        
-        {/* <View style={styles.amountContainer}>
-          <Text style={styles.amount}>{amount.toFixed(2)}</Text>
-        </View> */}
       </View>
     </Pressable>
   );

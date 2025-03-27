@@ -2,6 +2,7 @@ import { StyleSheet, Text, TextInput, View } from 'react-native';
 
 import { GlobalStyles } from '../../constants/styles';
 
+//used by groceryForm and by MealForm2
 function Input({ label, invalid, style, textInputConfig, editable }) {
 
   const inputStyles = [styles.input];

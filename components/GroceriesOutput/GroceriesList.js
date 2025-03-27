@@ -10,51 +10,7 @@ function GroceriesList({ groceries, handleSorting }) {
   const [sortMethod, setSortMethod] = useState("default");
   const [theArray, setTheArray] = useState(groceries);
 
-  // // Trigger update every time the screen is focused
-  // useFocusEffect(
-    
-  //   useCallback(() => {
-  //     // if(sortMethod==="item"){
-  //     //   handleSortByItem();
-  //     // }else if(sortMethod==="meal"){
-  //     //   handleSortByMeal();
-  //     // }else if(sortMethod==="default"){
-  //     //   handleSortByDefault();
-  //     // });
-  //     //setTheArray(listsCtx.lists);
-  //   //}, [listsCtx.lists]) // Dependencies ensure it runs when grocery list changes
-  //   }, []) // Dependencies ensure it runs when grocery list changes
-  // );
-
-  function handleSortByItem(){
-    const sortedGroceries = [...groceries].sort((a, b) => {
-    //groceries = [...groceries].sort((a, b) => {
-      const nameA = a.description ? a.description.toLowerCase() : ''; // Convert to lowercase, handle undefined
-      const nameB = b.description ? b.description.toLowerCase() : '';
-      return nameA.localeCompare(nameB); // Compare alphabetically
-    });
-    setTheArray(sortedGroceries);
-    setSortMethod("item");
-  }
-
-  function handleSortByMeal(){
-    const sortedGroceries = [...groceries].sort((a, b) => {
-    //groceries = [...groceries].sort((a, b) => {
-      const nameA = a.mealDesc ? a.mealDesc.toLowerCase() : ''; // Convert to lowercase, handle undefined
-      const nameB = b.mealDesc ? b.mealDesc.toLowerCase() : '';
-      return nameA.localeCompare(nameB); // Compare alphabetically
-    });
-    setTheArray(sortedGroceries);
-    setSortMethod("meal");
-  }
-
-  function handleSortByDefault(){
-    const sortedGroceries = [...groceries].reverse();
-    setTheArray(sortedGroceries);
-    setSortMethod("default");
-  }
-
-  //create individual grocery list items
+    //create individual grocery list items
   function renderGroceryItem(itemData) {
     return <GroceryItem itemData={itemData} sortStyle={sortMethod} />;
   }

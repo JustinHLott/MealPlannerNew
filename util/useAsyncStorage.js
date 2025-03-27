@@ -23,6 +23,7 @@ export async function getValue(key){
     }
   };
 
+  //An exemple of how to remove user data from phone storage for future use.
   // const removeUserData = async (userEmail, key) => {
   //   try {
   //     const storageKey = `${userEmail}_${key}`;

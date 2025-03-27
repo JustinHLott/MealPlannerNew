@@ -15,7 +15,6 @@ import { getValue} from '../util/useAsyncStorage';
 import { useEmail } from '../store/email-context';
 
 function RecentMeals() {
-  //console.log("Makes it to RecentMeals");
   const [isFetching, setIsFetching] = useState(true);
   const [error, setError] = useState();
   const [firstDate, setFirstDate] = useState(getSundayOfThisWeek());
@@ -40,7 +39,6 @@ function RecentMeals() {
         .then((result)=>{
           console.log("RecentMeals groupChosen:",result);
           //console.log("RecenetMeals groupUsing:",groupUsing);
-          //if(result instanceof Promise){
           let allGroups = [];
 
           meals.map((meal)=>{
@@ -84,12 +82,10 @@ function RecentMeals() {
     
   }
 
+  //set first time = true every time you come to the page.
   useFocusEffect(
     useCallback(() => {
       setFirstTime(true);
-      // setIsFetching(true);
-      // getMeals(); // Fetch meals every time screen is focused
-      // setIsFetching(false);
     }, [])
   );
 
@@ -107,7 +103,6 @@ function RecentMeals() {
     const groupUsing = pullGroupChosen()
     .then((result)=>{
       //console.log("RecentMeals groupChosen:",result);
-      //if(result instanceof Promise){
       let allGroups = [];
 
       meals.map((meal)=>{
@@ -135,7 +130,6 @@ function RecentMeals() {
           }else{
             setNotHidden(true);
           }
-          //setTheFallbackText('No meals registered for dates ' + firstDay.toISOString().slice(0, 10) + ' to ' + datePlus7.toISOString().slice(0, 10));
           //console.log("RecentMeals meals",theMeals)
           return theMeals;
         });
@@ -153,7 +147,6 @@ function RecentMeals() {
   };
 
   if(!firstDate){
-    //setFirstDate(new Date());
     const today = getSundayOfThisWeek();
     //console.log("today",today)
     setFirstDate(today);
@@ -183,7 +176,6 @@ function RecentMeals() {
     //console.log("RecentMeals Meals this week",thisGroupOfMeals.length)
     if(thisGroupOfMeals.length>0){
       const today = getDateMinusDays(firstDate,7);
-      // const today = getSundayOfThisWeek();
       setFirstDate(today);
     }
   }
@@ -254,7 +246,6 @@ function RecentMeals() {
         meals={recentMeals}
         fallbackText={theFallbackText}
         getGroupId = {getGroupId}
-        //makeNotHidden={makeNotHidden}
       />
     </View>
     

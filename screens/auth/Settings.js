@@ -1,8 +1,11 @@
 import React, { useEffect, useState, useCallback, useContext, memo, useMemo } from 'react';
-import {View, Text, StyleSheet, Pressable, FlatList, TextInput, Alert, Modal, ScrollView, Keyboard, TouchableWithoutFeedback  } from 'react-native';
+import {View, Text, StyleSheet, Pressable, FlatList, TextInput, Alert, Modal, KeyboardAvoidingView, ScrollView, Keyboard, TouchableWithoutFeedback  } from 'react-native';
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
+
 import axios from 'axios';
 import { useFocusEffect } from "@react-navigation/native";
 //import { ScrollView } from 'react-native-virtualized-view'
+import { ScrollView as ScrollView2 } from 'react-native-virtualized-view';//makes page scroll when keyboard is up so you can see under it.
 
 import Footer from "../../components/Footer";
 import { GlobalStyles } from '../../constants/styles';
@@ -448,6 +451,8 @@ export default function Settings({ route, navigation }){
   function groupSelection(groupOrGroups,memoizedGroup,memoizedGroups){
       return(
           <View>
+           
+
               <Text style={[styles.textHeader,{marginTop: 8, marginBottom: 2 }]}>Select Account:</Text>
               <FlatList
                   data={groupOrGroups?memoizedGroup:memoizedGroups}
@@ -484,7 +489,9 @@ export default function Settings({ route, navigation }){
 
   return (
     <View style={styles.topView}>
-      <View style={styles.topView}>
+      
+      <KeyboardAwareScrollView>
+
 
         <View style={{ paddingHorizontal: 20, paddingTop: 8 }}>
           {/* Account Type Selection */}
@@ -500,7 +507,7 @@ export default function Settings({ route, navigation }){
             </Button>
           }
           {seeScrollViews&&
-          <ScrollView>
+          <View>
             {accounts.map((item) => (
               <RadioButtonWithDelete
                 key={item.id} // Ensure unique key for React rendering
@@ -512,7 +519,7 @@ export default function Settings({ route, navigation }){
                 deleteYN={false}
               />
             ))}
-          </ScrollView>
+          </View>
 }
           {selectedAccount==="shared"&&seeScrollViews? groupSelection(groupOrGroups,memoizedGroup,memoizedGroups):noSelection()}
           <Modal
@@ -576,13 +583,15 @@ export default function Settings({ route, navigation }){
 
           </View>
         </View>
-      </View>
+
       <View style={{backgroundColor:GlobalStyles.colors.primary50}}>
         <Button 
-            style={{justifyContent:"center",alignItems:'center',flexDirection: 'row',marginBottom: 8}}
+            style={{justifyContent:"center",alignItems:'center',flexDirection: 'row',marginBottom: 8,marginTop: 8}}
             onPress={saveSettings}
             >Save Settings</Button>
       </View>
+      
+      </KeyboardAwareScrollView>
       <View style={styles.footer}>
         <Footer/>
       </View>

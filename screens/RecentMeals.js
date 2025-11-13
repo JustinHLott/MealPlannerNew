@@ -120,8 +120,10 @@ function RecentMeals() {
         const mealsSorted = [...allGroups,].sort((a, b) => a.date - b.date);
         //console.log("RecentMeals meals:",mealsSorted);
         const recentMeals1 = mealsSorted.filter((meal) => {
-          let firstDay = new Date(firstDate);
-          //console.log("Recent Meals firstDay:",firstDay);
+          let firstDay1 = new Date(firstDate);
+          //firstDay.setHours(0,0,0,0);
+          const firstDay = new Date(firstDay1.toISOString().split('T')[0]); 
+          console.log("Recent Meals firstDay:",firstDay);
           let datePlus7 = getDateMinusDays(firstDay, -6);
           //console.log("Recent Meals dayPlus7:",datePlus7);
           let theMeals = (meal.date >= firstDay && meal.date <= datePlus7)
@@ -185,8 +187,9 @@ function RecentMeals() {
     //console.log(mealsCtx.dates)
     //const today = getDateMinusDays(new Date(),1);
     const today = getSundayOfThisWeek();
+    const todayPlus3Hours = new Date(today.getTime() );
     //console.log("today",today)
-    setFirstDate(today);
+    setFirstDate(todayPlus3Hours);
   }
   function next(){
     setFirstTime(true);
